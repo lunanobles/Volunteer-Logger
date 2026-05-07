@@ -16,10 +16,20 @@
     <body>
         <h1>Volunteer Hours Logger</h1>
         <form>
-            <label for="volunteer_name">Volunteer Name:</label>
-            <select id="volunteer_name" name="volunteer_name" required>
-                <option>... pick option ...</option>
-            </select>
+            <div class="splitport_even">
+                <select id="volunteer_name" name="volunteer_name" required>
+                    <option disabled>... pick option ...</option>
+                </select>
+                <div>
+                    <p id="show_name">Name...</p>
+                    <p id="show_hours">Hours...</p>
+                    <p id="show_last">Last Updated...</p>
+                </div>
+            </div>
         </form>
+
+        <p id="test_string">...</p>
+        <script src="information.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>
