@@ -1,0 +1,17 @@
+{
+    "Jane Doe":{
+        "name":"Jane Doe - Ext",
+        "hours_total":40,
+        "last_update":"01/01/2000"
+    },
+    "Human Person":{
+        "name":"Human Person - Ext",
+        "hours_total":23.6,
+        "last_update":"01/01/2001"
+    },
+    "Nattaah Uman":{
+        "name":"Nattaah Uman - Ext",
+        "hours_total":644.2,
+        "last_update":"01/01/2026"
+    }
+}
