@@ -29,7 +29,7 @@ var hours_display = document.getElementById("show_hours");
 var last_display = document.getElementById("show_last");
 
 async function LoadData() {
-    const response = await fetch("./Database/external.json");
+    const response = await fetch("../Database/external.json");
     
     if (!response.ok) {throw new Error('Error from network!');} // If the network can't find the file
 
@@ -46,13 +46,38 @@ function WriteData(volunteer_data) {
     }
 }
 
+async function PostData(new_data) {
+    fetch("../Database/external.json"), {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(new_data)
+    }
+}
+
 submit_button.addEventListener("click", event => {
-    alert(`${name_dropdown.value}, ${hours_box.value}`);
+    let name = name_dropdown.value;
+    let hours = hours_box.value;
+    let date = new Date();
+
+    alert(`${name}, ${hours}, ${date}`);
+
+    var new_data = {
+        "name":name,
+        "hours_total":hours,
+        "last_update":date
+    }
     
-    // Looking for a way to edit, and then save volunteers.json
+    PostData(new_data);
+
+    WriteData();
+
+    // Looking for a way to edit, and then save external.json
+
     
     // This DOWNLOADS a new JSON
-    const blob = new Blob([Object.keys(LoadData())], {type:"application/json"});
+    /*const blob = new Blob([Object.keys(LoadData())], {type:"application/json"});
 
     const link = document.createElement("a");
 
@@ -62,7 +87,7 @@ submit_button.addEventListener("click", event => {
 
     document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link);
+    document.body.removeChild(link);*/
 })
 
 
