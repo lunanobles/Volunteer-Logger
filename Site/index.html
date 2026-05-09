@@ -15,19 +15,20 @@
 
     <body>
         <h1>Volunteer Hours Logger</h1>
-        <form>
-            <div class="splitport_even">
-                <select id="volunteer_name" name="volunteer_name" title="Volunteer Names" required>
-                    <option selected disabled>... pick option ...</option>
-                </select>
-                <div>
-                    <label for="add_hours">
-                        Add Hours:
-                    </label>
-                    <input id="add_hours" type="number"/>
-                </div>
-            </div>
-            <button id="submit_button" type="button">Download</button>
+        <label for="form_selector_button">Add to existing or create new volunteer.</label>
+        <input id="form_selector_button" type="radio">
+        <form id="form_existing_volunteer">
+            <label for="volunteer_names">Choose a volunteer:</label>
+            <select id="volunteer_names">
+                <option selected disabled>...choose a volunteer...</option>
+                <option>test</option>
+            </select><br/>
+            <label for="volunteer_hours">Hour many hours to add?</label>
+            <input id="volunteer_hours" type="number"><br/>
+            <button id="add_to_volunteer_button" type="button">Add to Volunteer!</button>
+        </form>
+        <form id="form_new_volunteer">
+
         </form>
 
         <p id="test_string">...</p>
