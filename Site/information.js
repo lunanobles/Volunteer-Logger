@@ -1,124 +1,77 @@
-
 ////// VARIABLES //////
 /// Document Variables
 var test_el = document.getElementById("test_string");
 var name_dropdown = document.getElementById("volunteer_names");
+var logger_signin = document.getElementById("sign_in");
 var hours_numeric = document.getElementById("volunteer_hours");
 var add_button = document.getElementById("add_to_volunteer_button");
+var override_button = document.getElementById("override_volunteer_button");
 /// Data Variables
-const JSON_URL = "../Database/external.json";
+const JSON_URL_VOLUNTEERS = "../Database/volunteers.json";
+const JSON_URL_LOGGERS = "../Database/loggers.json";
 
+(async function() {
 
+    
+    const data_volunteers = await GetJSONAsString(JSON_URL_VOLUNTEERS);
+    const volunteers      = await Object.keys(data_volunteers);
+    const data_loggers    = await GetJSONAsString(JSON_URL_LOGGERS);
+    const loggers         = await Object.keys(data_loggers);
 
-
-
-/** 
- * Gets and returns the current JS object in external.json.
- * @param {string} url - The URL to search for the JSON file
- * @returns {} The JSON object.
-*/
-async function JSONToObject(url) {
-    // Get the JSON promise response
-    const response = await fetch(url);
-    // If the network can't find the file, throw and error
-    // If this is thrown, the locator/directory is likely messed up --> fetch("<HERE>")
-    if (!response.ok) {throw new Error('Error from network!');} 
-    // Convert the response into a JS object
-    const volunteers_json = await response.json();
-    // Returns an object
-    return JSON.parse(JSON.stringify(volunteers_json));
-}
-
-async function WriteToDocument() {
-    // We await this because JSONToObject returns a Promise 
-    // (basically an empty object []) while downloading the data.
-    // Using await allows us to pause untill we have the data :)
-    const data = await JSONToObject(JSON_URL);
-
-    // This converts the whole object into an array of volunteer names
-    var volunteers = Object.keys(data);
-
-
-    // Edit the data and display
-    for (let i = 0; i < volunteers.length; i++) {
-        if (name_dropdown.value == volunteers[i]) {
-            data[volunteers[i]].hours_total += +hours_numeric.value;
-        }
-        test_el.innerText += volunteers[i] + ": " + data[volunteers[i]].hours_total + "\n";
-    }
-
-
-    // Make a new option for each volunteer in external.json
+    // Make a new option for each volunteer and logger in .jsons
     name_dropdown.innerHTML = "<option>..new pick..</option>";
+    logger_signin.innerHTML = "<option>... Not Signed In ...</option>";
 
-    for (let i = 0; i < volunteers.length; i++) {
+    for (let i = 0; i < volunteers.length; i++)
         name_dropdown.innerHTML += `<option>${volunteers[i]}</option>`;
+
+    for (let i = 0; i < loggers.length; i++)
+        logger_signin.innerHTML += `<option>${loggers[i]}</option>`;
+
+
+
+    async function GetJSONAsString(url) {
+        // Get the JSON promise response
+        const response = await fetch(url);
+        // If the network can't find the file, throw and error
+        // If this is thrown, the locator/directory is likely messed up --> fetch("<HERE>")
+        if (!response.ok) {throw new Error('Error from network!');} 
+        // Convert the response into a JS object
+        const volunteers_json = await response.json();
+        // Returns an object
+        return JSON.parse(JSON.stringify(volunteers_json));
     }
 
-    
-    test_el.innerText += "\n\n" + JSON.stringify(data) + "\n\n";
 
-    WriteToJSON(data);
+    add_button.addEventListener("click", async event => {
 
-    test_el.innerText += "\n\n" + JSON.stringify(data) + "\n\n";
-
-}
-
-function WriteToJSON(new_data) {
-    fetch(JSON_URL), {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(new_data)
-    }
-}
-
-/*async function GetCurrentHours() {
-    fetch(JSON_URL)
-        .then(response => response.json())
-        .then(data => {
-            const value = data[name_dropdown.value]["hours_total"]; 
-            return value;
-    });
-}*/
-
-WriteToDocument();
-
-add_button.addEventListener("click", async event => {
-
-    // We await this because JSONToObject returns a Promise 
-    // (basically an empty object []) while downloading the data.
-    // Using await allows us to pause untill we have the data :)
-    const data = await JSONToObject(JSON_URL);
-
-    // This converts the whole object into an array of volunteer names
-    var volunteers = Object.keys(data);
-
-    for (i = 0; i < volunteers.length; i++)
-    {
-        if (name_dropdown.value == volunteers[i]) {
-            const response = await fetch(JSON_URL, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                /* Right, so the goal is to change the 'hours_total' key
-                 * of the correct volunteer to itself+input and that's
-                 * quite the channel right now :sob: */
-                body: JSON.stringify({
-                    [volunteers[i]]: {
-                        'hours_total': [hours_numeric.value]
-                    }
-                })
-            })
+        for (i = 0; i < volunteers.length; i++) {
+            if (name_dropdown.value == volunteers[i]) {
+                data_volunteers[volunteers[i]].hours_total += +hours_numeric.value;
+                data_volunteers[volunteers[i]].updated_when = new Date();
+                data_volunteers[volunteers[i]].updated_by_whom = logger_signin.value;
+            }
         }
-    }
 
-    WriteToDocument();
-    
-    test_el.innerText += "\n\n" + JSON.stringify(data) + "\n\n";
-    
-})
+        test_el.innerText += JSON.stringify(data_volunteers) + 
+                             "\n-------------------------------\n";
+    })
 
-////// Program start - document.onLoad()
+
+
+    override_button.addEventListener("click", async event => {
+        for (i = 0; i < volunteers.length; i++) {
+            if (name_dropdown.value == volunteers[i]) {
+                data_volunteers[volunteers[i]].hours_total = +hours_numeric.value;
+                data_volunteers[volunteers[i]].updated_when = new Date();
+                data_volunteers[volunteers[i]].updated_by_whom = logger_signin.value;
+            }
+        }
+
+        test_el.innerText += JSON.stringify(data_volunteers) + 
+                             "\n-------------------------------\n";
+    })
+
+
+
+})()

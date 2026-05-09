@@ -14,10 +14,17 @@
     </head>
 
     <body>
+        <div style="justify-self: right;">
+            <label for="sign_in">Sign in as:</label>
+            <select id="sign_in">
+                <option></option>
+            </select>
+        </div>
         <h1>Volunteer Hours Logger</h1>
         <label for="form_selector_button">Add to existing or create new volunteer.</label>
-        <input id="form_selector_button" type="radio">
+        <input id="form_selector_button" type="checkbox">
         <form id="form_existing_volunteer">
+            <h2>Add Hours</h2>
             <label for="volunteer_names">Choose a volunteer:</label>
             <select id="volunteer_names">
                 <option selected disabled>...choose a volunteer...</option>
@@ -25,13 +32,15 @@
             </select><br/>
             <label for="volunteer_hours">Hour many hours to add?</label>
             <input id="volunteer_hours" type="number"><br/>
-            <button id="add_to_volunteer_button" type="button">Add to Volunteer!</button>
+            <button id="add_to_volunteer_button" type="button">Add to Volunteer's Hours!</button>
+            <button id="override_volunteer_button" type="button">Override Volunteer's Hours!</button>
         </form>
         <form id="form_new_volunteer">
-
+            <h2>Add Volunteer</h2>
         </form>
 
         <p id="test_string">...</p>
+        <script src="./design.js"></script>
         <script src="./information.js"></script>
     </body>
 </html>
