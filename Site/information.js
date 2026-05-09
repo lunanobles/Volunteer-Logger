@@ -4,8 +4,11 @@ var test_el = document.getElementById("test_string");
 var name_dropdown = document.getElementById("volunteer_names");
 var logger_signin = document.getElementById("sign_in");
 var hours_numeric = document.getElementById("volunteer_hours");
+var new_name = document.getElementById("new_volunteer_name");
+var new_hours = document.getElementById("new_volunteer_hours");
 var add_button = document.getElementById("add_to_volunteer_button");
 var override_button = document.getElementById("override_volunteer_button");
+var create_button = document.getElementById("new_volunteer_button");
 /// Data Variables
 const JSON_URL_VOLUNTEERS = "../Database/volunteers.json";
 const JSON_URL_LOGGERS = "../Database/loggers.json";
@@ -72,6 +75,25 @@ const JSON_URL_LOGGERS = "../Database/loggers.json";
                              "\n-------------------------------\n";
     })
 
+    create_button.addEventListener("click", async event => {
+        var new_volunteer = {
+            [new_name.value]: {
+                'hours_total':new_hours.value,
+                'updated_when':new Date(),
+                'updated_by_whom':logger_signin.value
+            }
+        }
 
+        fetch(JSON_URL_VOLUNTEERS, {
+            method: 'PUT',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(new_volunteer)
+        });
+
+        test_el.innerText += JSON.stringify(new_volunteer) + 
+                             "\n-------------------------------\n";
+    })
 
 })()
