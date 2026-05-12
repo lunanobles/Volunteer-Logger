@@ -135,6 +135,10 @@ const JSON_URL_LOGGERS = "../Database/loggers.json";
 
         test_el.innerText += JSON.stringify(new_volunteer) + 
                              "\n-------------------------------\n";
-    })
+    });
+
+
+
+    
 
 })()
