@@ -1,0 +1,16 @@
+:root {
+    --palette-FBLA-primary:   hsl(222, 85%, 27%);
+    --palette-FBLA-secondary: hsl(220, 73%, 43%);
+    --palette-FABLE-accent:   hsl(40, 91%, 53%);
+
+    --palette-background:  hsl(0, 0%, 1%);
+    --palette-foreground:  hsl(0, 0%, 15%);
+    --palette-text-bold:   hsl(0, 0%, 99%);
+    --palette-text-muted:  hsl(0, 0%, 80%);
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    color: var(--palette-text-muted);
+    background-color: var(--palette-background);
+}

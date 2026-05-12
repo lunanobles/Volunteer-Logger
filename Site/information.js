@@ -59,25 +59,22 @@ const JSON_URL_LOGGERS = "../Database/loggers.json";
                 data_volunteers[volunteers[i]].hours_total += +hours_numeric.value;
                 data_volunteers[volunteers[i]].updated_when = new Date();
                 data_volunteers[volunteers[i]].updated_by_whom = logger_signin.value;
-
                 var updated_volunteer = {
                     'hours_total':hours_numeric.value + data_volunteers[volunteers[i]].hours_total,
                     'updated_when':new Date(),
                     'updated_by_whom':logger_signin.value
                 }
-
                 fetch(JSON_URL_VOLUNTEERS, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type':'application/json'
                     },
-                    body: JSON.stringify(new_volunteer)
+                    body: JSON.stringify(updated_volunteer)
                 });
             }
         }
-
-        test_el.innerText += JSON.stringify(data_volunteers) + 
-                             "\n-------------------------------\n";
+        
+        test_el.innerText += GetJSONAsString(JSON_URL_VOLUNTEERS);
     })
 
 
@@ -103,7 +100,7 @@ const JSON_URL_LOGGERS = "../Database/loggers.json";
                     headers: {
                         'Content-Type':'application/json'
                     },
-                    body: JSON.stringify(new_volunteer)
+                    body: JSON.stringify(updated_volunteer)
                 });
             }
         }
@@ -139,6 +136,6 @@ const JSON_URL_LOGGERS = "../Database/loggers.json";
 
 
 
-    
+
 
 })()
