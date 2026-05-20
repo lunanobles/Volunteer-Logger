@@ -1,16 +1,104 @@
 :root {
     --palette-FBLA-primary:   hsl(222, 85%, 27%);
     --palette-FBLA-secondary: hsl(220, 73%, 43%);
-    --palette-FABLE-accent:   hsl(40, 91%, 53%);
+    --palette-FBLA-accent:    hsl(040, 91%, 53%);
 
-    --palette-background:  hsl(0, 0%, 1%);
+    --palette-background:  hsl(0, 0%,  1%);
     --palette-foreground:  hsl(0, 0%, 15%);
     --palette-text-bold:   hsl(0, 0%, 99%);
     --palette-text-muted:  hsl(0, 0%, 80%);
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --palette-background:  hsl(0, 0%, 85%);
+        --palette-foreground:  hsl(0, 0%, 99%);
+        --palette-text-bold:   hsl(0, 0%, 01%);
+        --palette-text-muted:  hsl(0, 0%, 15%);
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: "Nunito", sans-serif;
     color: var(--palette-text-muted);
     background-color: var(--palette-background);
+    & h1,
+    & h2,
+    & h3 {
+        color: var(--palette-text-bold);
+    }
+}
+
+main {
+    & > section {
+        & > form {
+            background-color: var(--palette-foreground);
+            justify-self: center;
+            border: 0.5vw solid var(--palette-FBLA-primary);
+            border-radius:  5px;
+            padding: 5px;
+            width: 90%;
+            max-width: 700px;
+            & hr {
+                background-color: var(--palette-FBLA-accent);
+                border: none;
+                border-radius: 5px;
+                width: 50%;
+                height: 1vh;
+                margin-bottom: 1vh;
+            }
+        }
+        & > h3 {
+            justify-self: center;
+        }
+        & > table {
+            width: 90%;
+            justify-self: center;
+            background-color: var(--palette-foreground);
+            border: 0.5vw solid var(--palette-FBLA-primary);
+            border-radius:  5px;
+            padding: 5px;
+            & thead {
+                font-style: italic;
+                text-decoration: underline;
+            }
+            & th:nth-child(1),
+              td:nth-child(1) {
+                width: 75%;
+                text-align: left;
+            }
+            & th:nth-child(2),
+              td:nth-child(2) {
+                width: 15%;
+                text-align: right;
+            }
+            & th:nth-child(3),
+              td:nth-child(3) {
+                width: 10%;
+                text-align: center;
+            }
+            & tr:nth-child() {
+                border: 3px solid blue;
+            }
+        }
+    }
+}
+
+main section#forms_content {
+    width: 75%;
+    height: 80vh;
+}
+
+.splitport_even {
+    display: flex;
+    justify-content: space-evenly;
+    & > * {
+        width: 50%;
+    }
 }

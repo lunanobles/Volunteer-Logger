@@ -11,6 +11,7 @@
 
         <link rel="stylesheet" href="./styles_font.css"/>
         <link rel="stylesheet" href="./styles_general.css"/>
+        <link rel="stylesheet" href="./styles_special.css"/>
     </head>
 
     <body>
@@ -21,29 +22,75 @@
             </select>
         </div>
         <h1>Volunteer Hours Logger</h1>
-        <label for="form_selector_button">Add to existing or create new volunteer.</label>
-        <input id="form_selector_button" type="checkbox">
-        <form id="form_existing_volunteer">
-            <h2>Add Hours</h2>
-            <label for="volunteer_names">Choose a volunteer:</label>
-            <select id="volunteer_names">
-                <option selected disabled>...choose a volunteer...</option>
-                <option>test</option>
-            </select><br/>
-            <label for="volunteer_hours">Hour many hours to add?</label>
-            <input id="volunteer_hours" type="number"><br/>
-            <button id="add_to_volunteer_button" type="button">Add to Volunteer's Hours!</button>
-            <button id="override_volunteer_button" type="button">Override Volunteer's Hours!</button>
-        </form>
-        <form id="form_new_volunteer">
-            <h2>Add Volunteer</h2>
-            <label for="new_volunteer_name">New Volunteer Name:</label>
-            <input id="new_volunteer_name" type="text"/>
-            <label for="new_volunteer_hours">New Volunteer Hours:</label>
-            <input id="new_volunteer_hours" type="number"/><br/>
-            <button id="new_volunteer_button" type="button">Create New Volunteer</button>
-        </form>
-
+        <main class="splitport_even">
+            <section id="forms_content">
+                <label for="form_selector_button">Add to existing or create new volunteer.</label>
+                <input id="form_selector_button" type="checkbox">
+                <form id="form_existing_volunteer">
+                    <h2>Add Hours</h2>
+                    <hr/>
+                    <div class="splitport_even">
+                        <label for="volunteer_names">Name:</label>
+                        <select id="volunteer_names">
+                            <option selected disabled>...pick a name</option>
+                            <option>test</option>
+                        </select><br/>
+                        <label for="volunteer_hours">Hours</label>
+                        <input id="volunteer_hours" type="number"><br/>
+                    </div>
+                    <div>
+                        <label for="volunteer_opprotunity">Event Description</label><br/>
+                        <input id="volunteer_opprotunity" type="text">
+                    </div>
+                    <button id="override_volunteer_button" type="button">Override</button>
+                    <button id="add_to_volunteer_button" type="button">Add To Volunteer</button>
+                </form>
+                <form id="form_new_volunteer">
+                    <h2>Create Volunteer</h2>
+                    <hr/>
+                    <label for="new_volunteer_name">New Volunteer Name:</label>
+                    <input id="new_volunteer_name" type="text"/>
+                    <label for="new_volunteer_hours">New Volunteer Hours:</label>
+                    <input id="new_volunteer_hours" type="number"/><br/>
+                    <button id="new_volunteer_button" type="button">Create New Volunteer</button>
+                </form>
+            </section>
+            <section id="data_content">
+                <h3>Volunteers</h3>
+                <table>
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Hours</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Test Person</td>
+                            <td>100.12</td>
+                            <td><span class="material-symbols-rounded">arrow_drop_down</span></td>
+                        </tr>
+                        <tr>
+                            <td>Test Person</td>
+                            <td>100.12</td>
+                            <td><span class="material-symbols-rounded">arrow_drop_down</span></td>
+                        </tr>
+                        <tr>
+                            <td>Test Person</td>
+                            <td>100.12</td>
+                            <td><span class="material-symbols-rounded">arrow_drop_down</span></td>
+                        </tr>
+                        <tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
         <p id="test_string">...</p>
         <script src="./design.js"></script>
         <script src="./information.js"></script>
