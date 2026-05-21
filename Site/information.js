@@ -69,6 +69,7 @@ const PHP_URL = "./server_side.php";
         // Grab fresh data
         const all_volunteers = await GetJSONAsString(JSON_URL_VOLUNTEERS);
 
+        test_el.innerText += all_volunteers;
 
         // Edit data
         all_volunteers[current_volunteer].push(new_entry);
@@ -76,20 +77,22 @@ const PHP_URL = "./server_side.php";
         test_el.innerText += all_volunteers[current_volunteer];
 
         // Return edited data
-        try {
-            const response = await fetch(PHP_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/json'
-                },
-                body: JSON.stringify(all_volunteers)
-            })
-        }
-        catch (error) {
-            test_el.innerText += "\nAHHHHHH :(";
-        }
+        const response = await fetch('server_side.php', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(all_volunteers) 
+        });
 
-        // Check if it worked
+        // Check the response from PHP
+        const result = await response.json();
+
+        if (response.ok && result.status === "success") {
+            test_el.innerText = "Successfully updated via XAMPP Apache!";
+        } else {
+            test_el.innerText = "Server Error: " + result.message;
+        }
 
     });
 

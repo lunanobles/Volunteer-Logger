@@ -1,33 +1,36 @@
 <?php
+// Allow requests from your local server (CORS)
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
 
-//* Allowing headers
-header("Access-Control-Allow-Origin: *"); // Allow from anywhere
-header("Access-Control-Allow-Headers: Content-Type"); // Allow Content
-header("Content-Type: application/json"); // Allow JSON
+// Only allow POST requests
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    // 3Read the raw JSON payload sent by JavaScript fetch()
+    $jsonData = file_get_contents('php://input');
 
-
-// Handles POST requests from files
-if ($_SERVER['REQUEST_METHOD'] === 'POST')
-{
-
-    // Get the JSON from the information.js fetch()
-    $json_data = file_get_contents("php://input");
-
-    // Define a path to the JSON file
-    $json_path = __DIR__ . "../Database/volunteers.json";
-
-    // Write the incoming data to the .json file
-    if (file_put_contents($json_path, $json_data) !== false)
-    {
-        http_response_code(200); // Let the host know it worked
-        echo json_encode(["status" => "success", "message" => "Volunteers updated successfully!"]); // encode
+    // 4. Validate that the data is actual JSON
+    if (json_decode($jsonData) === null) {
+        http_response_code(400);
+        echo json_encode(["status" => "error", "message" => "Invalid JSON data received."]);
+        exit;
     }
-    else {
-        http_response_code(500); // Invalid permmission
-        echo json_encode(["status" => "error", "message" => "Failed to write!"]); // ugh
-    }
-        
 
+    // 5. Define the path to your JSON file 
+    // This points to "../Database/volunteers.json" relative to where this PHP file sits
+    $filePath = __DIR__ . '/../Database/volunteers.json';
+
+    // 6. Write the data to the file
+    if (file_put_contents($filePath, $jsonData) !== false) {
+        http_response_code(200);
+        echo json_encode(["status" => "success", "message" => "Volunteers updated successfully!"]);
+    } else {
+        http_response_code(500);
+        echo json_encode(["status" => "error", "message" => "Failed to write data to file. Check folder permissions."]);
+    }
+} else {
+    http_response_code(405);
+    echo json_encode(["status" => "error", "message" => "Method Not Allowed. Use POST."]);
 }
-
->
+?>
