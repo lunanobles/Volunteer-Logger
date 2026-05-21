@@ -7,30 +7,27 @@ header("Content-Type: application/json");
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    // 3Read the raw JSON payload sent by JavaScript fetch()
-    $jsonData = file_get_contents('php://input');
+    // Read the raw JSON payload sent by JavaScript fetch()
+    $json_data = file_get_contents('php://input');
 
-    // 4. Validate that the data is actual JSON
-    if (json_decode($jsonData) === null) {
+    // Validating that the data is actual JSON
+    if (json_decode($json_data) === null) {
         http_response_code(400);
         echo json_encode(["status" => "error", "message" => "Invalid JSON data received."]);
         exit;
     }
 
-    // 5. Define the path to your JSON file 
+    // Define the path to your JSON file 
     // This points to "../Database/volunteers.json" relative to where this PHP file sits
-    $filePath = __DIR__ . '/../Database/volunteers.json';
+    $file_path = __DIR__ . '/../Database/volunteers.json';
 
-    // 6. Write the data to the file
-    if (file_put_contents($filePath, $jsonData) !== false) {
-        http_response_code(200);
-        echo json_encode(["status" => "success", "message" => "Volunteers updated successfully!"]);
+    // Write the data to the file
+    if (file_put_contents($file_path, $json_data) !== false) {
+        http_response_code(200); // All good
+        echo json_encode(["status" => "success", "message" => "Volunteers updated successfully!"]); // Yayy!
     } else {
-        http_response_code(500);
-        echo json_encode(["status" => "error", "message" => "Failed to write data to file. Check folder permissions."]);
+        http_response_code(500); // Server error
+        echo json_encode(["status" => "error", "message" => "Failed to write data to file, could be folder permissions."]); // AGGOUHGFUOSHGPOUHSGF:OJH
     }
-} else {
-    http_response_code(405);
-    echo json_encode(["status" => "error", "message" => "Method Not Allowed. Use POST."]);
 }
 ?>
