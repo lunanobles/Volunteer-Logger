@@ -19,10 +19,10 @@ const PHP_URL = "./server_side.php";
 (async function() {
 
     
-    const data_volunteers   = await GetJSONAsString(JSON_URL_VOLUNTEERS);
-    const volunteers        = await Object.keys(JSON.parse(data_volunteers));
-    const data_loggers      = await GetJSONAsString(JSON_URL_LOGGERS);
-    const loggers           = await Object.keys(JSON.parse(data_loggers));
+    const data_volunteers   = await GetJSONData(JSON_URL_VOLUNTEERS);
+    const volunteers        = await Object.keys(data_volunteers);
+    const data_loggers      = await GetJSONData(JSON_URL_LOGGERS);
+    const loggers           = await Object.keys(data_loggers);
 
     // Make a new option for each volunteer and logger in .jsons
     name_dropdown.innerHTML = "<option>..new pick..</option>";
@@ -40,7 +40,7 @@ const PHP_URL = "./server_side.php";
      * @param {string} url 
      * @returns A JSON.stringify() of the data found at `url`
      */
-    async function GetJSONAsString(url) {
+    async function GetJSONData(url) {
         // Get the JSON promise response
         const response = await fetch(url);
         // If the network can't find the file, throw and error
@@ -49,7 +49,7 @@ const PHP_URL = "./server_side.php";
         // Convert the response into a JS object
         const volunteers_json = await response.json();
         // Returns an object
-        return JSON.stringify(volunteers_json);
+        return volunteers_json;
     }
 
     /**
@@ -67,14 +67,10 @@ const PHP_URL = "./server_side.php";
         const new_entry = [event_hours, event_description, event_date, log_date, log_name];
 
         // Grab fresh data
-        const all_volunteers = await GetJSONAsString(JSON_URL_VOLUNTEERS);
-
-        test_el.innerText += all_volunteers;
+        const all_volunteers = await GetJSONData(JSON_URL_VOLUNTEERS);
 
         // Edit data
         all_volunteers[current_volunteer].push(new_entry);
-
-        test_el.innerText += all_volunteers[current_volunteer];
 
         // Return edited data
         const response = await fetch('server_side.php', { 
@@ -82,16 +78,16 @@ const PHP_URL = "./server_side.php";
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(all_volunteers) 
+            body: JSON.stringify(all_volunteers)
         });
 
         // Check the response from PHP
         const result = await response.json();
 
         if (response.ok && result.status === "success") {
-            test_el.innerText = "Successfully updated via XAMPP Apache!";
+            test_el.innerText += "Successfully updated via XAMPP Apache!" + "\nNew Data: " + JSON.stringify(all_volunteers);
         } else {
-            test_el.innerText = "Server Error: " + result.message;
+            test_el.innerText += "Server Error: " + result.message;
         }
 
     });
