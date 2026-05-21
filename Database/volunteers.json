@@ -1,6 +1,9 @@
 {
     "Jane Doe":[
-        [5.50, "Description", "Date of Event", "Log Date()", "Logger Name"],
         [5.50, "Description", "Date of Event", "Log Date()", "Logger Name"]
+    ],
+    "Nattah Uman":[
+        [10, "Description", "Date of Event", "Log Date()", "Logger Name"],
+        [10, "Description", "Date of Event", "Log Date()", "Logger Name"]
     ]
 }

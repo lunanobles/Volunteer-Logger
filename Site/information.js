@@ -14,14 +14,15 @@ var create_button = document.getElementById("new_volunteer_button");
 /// Data Variables
 const JSON_URL_VOLUNTEERS = "../Database/volunteers.json";
 const JSON_URL_LOGGERS = "../Database/loggers.json";
+const PHP_URL = "./server_side.php";
 
 (async function() {
 
     
-    const data_volunteers = await GetJSONAsString(JSON_URL_VOLUNTEERS);
-    const volunteers      = await Object.keys(data_volunteers);
-    const data_loggers    = await GetJSONAsString(JSON_URL_LOGGERS);
-    const loggers         = await Object.keys(data_loggers);
+    const data_volunteers   = await GetJSONAsString(JSON_URL_VOLUNTEERS);
+    const volunteers        = await Object.keys(JSON.parse(data_volunteers));
+    const data_loggers      = await GetJSONAsString(JSON_URL_LOGGERS);
+    const loggers           = await Object.keys(JSON.parse(data_loggers));
 
     // Make a new option for each volunteer and logger in .jsons
     name_dropdown.innerHTML = "<option>..new pick..</option>";
@@ -37,7 +38,7 @@ const JSON_URL_LOGGERS = "../Database/loggers.json";
     /**
      * Finds and returns a JSON file at url as a JSON.parse
      * @param {string} url 
-     * @returns A JSON.parse() of the data found at url
+     * @returns A JSON.stringify() of the data found at `url`
      */
     async function GetJSONAsString(url) {
         // Get the JSON promise response
@@ -48,7 +49,7 @@ const JSON_URL_LOGGERS = "../Database/loggers.json";
         // Convert the response into a JS object
         const volunteers_json = await response.json();
         // Returns an object
-        return JSON.parse(JSON.stringify(volunteers_json));
+        return JSON.stringify(volunteers_json);
     }
 
     /**
@@ -65,19 +66,30 @@ const JSON_URL_LOGGERS = "../Database/loggers.json";
 
         const new_entry = [event_hours, event_description, event_date, log_date, log_name];
 
-        fetch(JSON_URL_VOLUNTEERS, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify({
-                current_volunteer: {
-                    new_entry
-                }
-            })
-        })
+        // Grab fresh data
+        const all_volunteers = await GetJSONAsString(JSON_URL_VOLUNTEERS);
 
-        test_el.innerText = await JSON.stringify(GetJSONAsString(JSON_URL_VOLUNTEERS));
+
+        // Edit data
+        all_volunteers[current_volunteer].push(new_entry);
+
+        test_el.innerText += all_volunteers[current_volunteer];
+
+        // Return edited data
+        try {
+            const response = await fetch(PHP_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(all_volunteers)
+            })
+        }
+        catch (error) {
+            test_el.innerText += "\nAHHHHHH :(";
+        }
+
+        // Check if it worked
 
     });
 
