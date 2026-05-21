@@ -1,1 +1,34 @@
-{"Jane Doe":[[5.5,"Description","Date of Event","Log Date()","Logger Name"]],"Nattah Uman":[[10,"Description","Date of Event","Log Date()","Logger Name"],[10,"Description","Date of Event","Log Date()","Logger Name"],[7,"sfhshfgfsg","2026-05-21","21/05/2026","... Not Signed In ..."]]}
+{
+  "Jane Doe": [
+    [
+      5.5,
+      "Description",
+      "Date of Event",
+      "Log Date()",
+      "Logger Name"
+    ]
+  ],
+  "Nattah Uman": [
+    [
+      10,
+      "Description",
+      "Date of Event",
+      "Log Date()",
+      "Logger Name"
+    ],
+    [
+      10,
+      "Description",
+      "Date of Event",
+      "Log Date()",
+      "Logger Name"
+    ],
+    [
+      7,
+      "sfhshfgfsg",
+      "2026-05-21",
+      "21/05/2026",
+      "... Not Signed In ..."
+    ]
+  ]
+}

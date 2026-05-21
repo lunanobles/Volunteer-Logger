@@ -26,6 +26,7 @@
 
 body {
     font-family: "Nunito", sans-serif;
+    font-size: 1em;
     color: var(--palette-text-muted);
     background-color: var(--palette-background);
     & h1,
@@ -83,8 +84,11 @@ main {
                 width: 10%;
                 text-align: center;
             }
-            & tr:nth-child() {
+            & tr:nth-child(odd) {
                 border: 3px solid blue;
+            }
+            & .more_info {
+                font-size: 5px;
             }
         }
     }

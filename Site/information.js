@@ -9,8 +9,8 @@ var event_desc_box = document.getElementById("volunteer_opprotunity");
 var new_name = document.getElementById("new_volunteer_name");
 var new_hours = document.getElementById("new_volunteer_hours");
 var add_button = document.getElementById("add_to_volunteer_button");
-var override_button = document.getElementById("override_volunteer_button");
 var create_button = document.getElementById("new_volunteer_button");
+var delete_button = document.getElementById("delete_volunteer_button");
 /// Data Variables
 const JSON_URL_VOLUNTEERS = "../Database/volunteers.json";
 const JSON_URL_LOGGERS = "../Database/loggers.json";
