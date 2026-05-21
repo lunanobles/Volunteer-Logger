@@ -1,20 +1,6 @@
 {
-    "Jane Doe":{
-        "hours_total":0,
-        "last_event":["N/A"],
-        "updated_when":"N/A",
-        "updated_by_whom":"No one"
-    },
-    "Human Person":{
-        "hours_total":62.10,
-        "events":["I don't want to type anymore", "Phil-fest Banner Handling"],
-        "updated_when":"Day Mth 00 0000 00:00:00 GMT-0000 (Time Zone)",
-        "updated_by_whom":""
-    },
-    "Nattaah Uman":{
-        "hours_total":8302.91,
-        "last_event":["N/A"],
-        "updated_when":"Day Mth 00 0000 00:00:00 GMT-0000 (Time Zone)",
-        "updated_by_whom":""
-    }
+    "Jane Doe":[
+        [5.50, "Description", "Date of Event", "Log Date()", "Logger Name"],
+        [5.50, "Description", "Date of Event", "Log Date()", "Logger Name"]
+    ]
 }
