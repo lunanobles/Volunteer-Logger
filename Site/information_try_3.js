@@ -4,8 +4,6 @@ var test_el = document.getElementById("test_string");
 var name_dropdown = document.getElementById("volunteer_names");
 var logger_signin = document.getElementById("sign_in");
 var hours_numeric = document.getElementById("volunteer_hours");
-var event_date_box = document.getElementById("event_date");
-var event_desc_box = document.getElementById("volunteer_opprotunity");
 var new_name = document.getElementById("new_volunteer_name");
 var new_hours = document.getElementById("new_volunteer_hours");
 var add_button = document.getElementById("add_to_volunteer_button");
@@ -55,38 +53,61 @@ const JSON_URL_LOGGERS = "../Database/loggers.json";
      * On click of the add-to-volunter-hours button, we edit and update the data in the JSON.
      */
     add_button.addEventListener("click", async event => {
-    
-        const current_volunteer = name_dropdown.value;
-        const event_hours       = parseFloat(hours_numeric.value);
-        const event_date        = event_date_box.value;
-        const event_description = event_desc_box.value;
-        const log_name          = logger_signin.value;
-        const log_date          = new Date().toLocaleDateString();
 
-        const new_entry = [event_hours, event_description, event_date, log_date, log_name];
-
-        fetch(JSON_URL_VOLUNTEERS, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify({
-                current_volunteer: {
-                    new_entry
+        for (i = 0; i < volunteers.length; i++) {
+            if (name_dropdown.value == volunteers[i]) {
+                data_volunteers[volunteers[i]].hours_total += +hours_numeric.value;
+                data_volunteers[volunteers[i]].event_information += {}
+                data_volunteers[volunteers[i]].updated_when = new Date();
+                data_volunteers[volunteers[i]].updated_by_whom = logger_signin.value;
+                var updated_volunteer = {
+                    'hours_total':hours_numeric.value + data_volunteers[volunteers[i]].hours_total,
+                    'updated_when':new Date(),
+                    'updated_by_whom':logger_signin.value
                 }
-            })
-        })
-
-        test_el.innerText = await JSON.stringify(GetJSONAsString(JSON_URL_VOLUNTEERS));
-
-    });
+                fetch(JSON_URL_VOLUNTEERS, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify(updated_volunteer)
+                });
+            }
+        }
+        
+        test_el.innerText += GetJSONAsString(JSON_URL_VOLUNTEERS);
+    })
 
 
     /**
      * On click of the override-volunter-hours button, we edit and update the data in the JSON.
      */
     override_button.addEventListener("click", async event => {
-        
+        for (i = 0; i < volunteers.length; i++) {
+            if (name_dropdown.value == volunteers[i]) {
+                // my concern is that this doesn't actually edit the JSON yet
+                data_volunteers[volunteers[i]].hours_total = +hours_numeric.value;
+                data_volunteers[volunteers[i]].updated_when = new Date();
+                data_volunteers[volunteers[i]].updated_by_whom = logger_signin.value;
+
+                var updated_volunteer = {
+                    'hours_total':hours_numeric.value,
+                    'updated_when':new Date(),
+                    'updated_by_whom':logger_signin.value
+                }
+
+                fetch(JSON_URL_VOLUNTEERS, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify(updated_volunteer)
+                });
+            }
+        }
+
+        test_el.innerText += JSON.stringify(data_volunteers) + 
+                             "\n-------------------------------\n";
     })
 
 
@@ -94,7 +115,24 @@ const JSON_URL_LOGGERS = "../Database/loggers.json";
      * On click of the override-volunter-hours button, we create a new volunteer and add it to the JSON.
      */
     create_button.addEventListener("click", async event => {
-        
+        var new_volunteer = {
+            [new_name.value]: {
+                'hours_total':new_hours.value,
+                'updated_when':new Date(),
+                'updated_by_whom':logger_signin.value
+            }
+        }
+
+        fetch(JSON_URL_VOLUNTEERS, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(new_volunteer)
+        });
+
+        test_el.innerText += JSON.stringify(new_volunteer) + 
+                             "\n-------------------------------\n";
     });
 
 
