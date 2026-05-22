@@ -60,7 +60,8 @@
                 </form>
             </section>
             <section id="data_content">
-                <h3>Volunteers</h3>
+                <h3>Volunteers | <button id="download_button" type="button">Download JSON Data</button></h3>
+                
                 <table>
                     <colgroup>
                         <col>
@@ -71,16 +72,14 @@
                         <tr>
                             <th>Name</th>
                             <th>Hours</th>
-                            <th></th>
+                            <th><button type="button">More Info</button></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <div class="table_volunteer">
-                            <tr>
-                                <td>Test Person</td>
-                                <td>100.12</td>
-                                <td><span class="material-symbols-rounded">arrow_drop_up</span></td>
-                            </tr>
+                        <tr onclick="">
+                            <td>Test Person</td>
+                            <td>100.12</td>
+                            <td><span class="material-symbols-rounded">arrow_drop_up</span></td>
                             <div class="more_info">
                                 <tr>
                                     <td>Event description</td>
@@ -91,7 +90,7 @@
                                     <td>5</td>
                                 </tr>
                             </div>
-                        </div>
+                        </tr>
                         <tr>
                             <td>Test Person</td>
                             <td>100.12</td>

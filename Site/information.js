@@ -11,6 +11,7 @@ var new_hours = document.getElementById("new_volunteer_hours");
 var add_button = document.getElementById("add_to_volunteer_button");
 var create_button = document.getElementById("new_volunteer_button");
 var delete_button = document.getElementById("delete_volunteer_button");
+var download_button = document.getElementById("download_button");
 /// Data Variables
 const JSON_URL_VOLUNTEERS = "../Database/volunteers.json";
 const JSON_URL_LOGGERS = "../Database/loggers.json";
@@ -51,7 +52,7 @@ const PHP_URL = "./server_side.php";
         // Returns an object
         return volunteers_json;
     }
-
+    
     /**
      * On click of the add-to-volunter-hours button, we edit and update the data in the JSON.
      */
@@ -73,6 +74,7 @@ const PHP_URL = "./server_side.php";
         all_volunteers[current_volunteer].push(new_entry);
 
         // Return edited data
+                                  // I wrote my own PHP handler for the POST HTTP
         const response = await fetch('server_side.php', { 
             method: 'POST',
             headers: {
@@ -84,9 +86,9 @@ const PHP_URL = "./server_side.php";
         // Check the response from PHP
         const result = await response.json();
 
-        if (response.ok && result.status === "success") {
+        if (response.ok && result.status === "success") { // If everything is good
             test_el.innerText += "Successfully updated via XAMPP Apache!" + "\nNew Data: " + JSON.stringify(all_volunteers);
-        } else {
+        } else { // If stuff failed :(
             test_el.innerText += "Server Error: " + result.message;
         }
 
@@ -109,7 +111,21 @@ const PHP_URL = "./server_side.php";
     });
 
 
+    download_button.addEventListener("click", async event => {
 
+        const content = await GetJSONData(JSON_URL_VOLUNTEERS); // Get the freshest data
+
+        const blob = new Blob([content], { type: 'application/json' }); // Format the data into a new URL
+        const url = URL.createObjectURL(blob);
+        
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `volunteer-data${new Date().toLocaleDateString()}.json`; // Default new file name
+        link.click();
+        
+        // Clean up
+        URL.revokeObjectURL(url);
+    })
 
 
 })()
