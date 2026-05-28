@@ -12,6 +12,8 @@ var add_button = document.getElementById("add_to_volunteer_button");
 var create_button = document.getElementById("new_volunteer_button");
 var delete_button = document.getElementById("delete_volunteer_button");
 var download_button = document.getElementById("download_button");
+
+
 /// Data Variables
 const JSON_URL_VOLUNTEERS = "../Database/volunteers.json";
 const JSON_URL_LOGGERS = "../Database/loggers.json";
@@ -34,6 +36,7 @@ const PHP_URL = "./server_side.php";
 
     for (let i = 0; i < loggers.length; i++)
         logger_signin.innerHTML += `<option>${loggers[i]}</option>`;
+
 
 
     /**
