@@ -19,6 +19,13 @@ const JSON_URL_VOLUNTEERS = "../Database/volunteers.json";
 const JSON_URL_LOGGERS = "../Database/loggers.json";
 const PHP_URL = "./server_side.php";
 
+
+/// NEED TO REFORMAT
+/* 1. addEventListener,
+   2. fetch data,
+   3. helper functions
+   in that order */ 
+
 (async function() {
 
     
