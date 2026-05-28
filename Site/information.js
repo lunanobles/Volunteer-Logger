@@ -9,8 +9,8 @@ var event_desc_box = document.getElementById("volunteer_opprotunity");
 var new_name = document.getElementById("new_volunteer_name");
 var new_hours = document.getElementById("new_volunteer_hours");
 var add_button = document.getElementById("add_to_volunteer_button");
-var create_button = document.getElementById("new_volunteer_button");
-var delete_button = document.getElementById("delete_volunteer_button");
+//var create_button = document.getElementById("new_volunteer_button");
+//var delete_button = document.getElementById("delete_volunteer_button");
 var download_button = document.getElementById("download_button");
 
 
@@ -101,29 +101,33 @@ const PHP_URL = "./server_side.php";
     /**
      * On click of the override-volunter-hours button, we edit and update the data in the JSON.
      */
-    override_button.addEventListener("click", async event => {
-        
-    })
+//    override_button.addEventListener("click", async event => {
+//        
+//    })
 
 
     /**
      * On click of the override-volunter-hours button, we create a new volunteer and add it to the JSON.
      */
-    create_button.addEventListener("click", async event => {
-        
-    });
+//    create_button.addEventListener("click", async event => {
+//        
+//    });
 
 
     download_button.addEventListener("click", async event => {
 
+        test_el.innerText = "Onclick Activated";
+
         const content = await GetJSONData(JSON_URL_VOLUNTEERS); // Get the freshest data
 
-        const blob = new Blob([content], { type: 'application/json' }); // Format the data into a new URL
+        const json_string = JSON.stringify(content, null, 4); // found that 'null, 4' adds indent to the file
+
+        const blob = new Blob([json_string], { type: 'application/json' }); // Format the data into a new URL
         const url = URL.createObjectURL(blob);
         
         const link = document.createElement('a');
         link.href = url;
-        link.download = `volunteer-data${new Date().toLocaleDateString()}.json`; // Default new file name
+        link.download = `volunteer-data${new Date().toLocaleDateString().replaceAll('/', '-')/*Replace All makes date slashes into hyphen*/}.json`; // Default new file name
         link.click();
         
         // Clean up
