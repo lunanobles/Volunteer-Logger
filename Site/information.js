@@ -74,6 +74,9 @@ const PHP_URL = "./server_side.php";
             test_el.innerText += "Server Error: " + result.message;
         }
 
+
+        location.reload(); // Update the table by refershing and getting data again
+
     });
 
 
@@ -197,7 +200,7 @@ const PHP_URL = "./server_side.php";
             //// event[3] is Log Date()
 
             per_event_HTML += 
-            // this creates a new row for every event any one volunteer has
+            //* this creates a new row for every event any one volunteer has
             `
                 <tr>
                     <td>${description}</td>
