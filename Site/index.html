@@ -46,17 +46,27 @@
                         <label for="event_date">Event Date:</label>
                         <input id="event_date" type="date" title="Event Date">
                     </div>
-                    <button id="override_volunteer_button" type="button">Override</button>
                     <button id="add_to_volunteer_button" type="button">Add To Volunteer</button>
                 </form>
                 <form id="form_new_volunteer">
-                    <h2>Create Volunteer</h2>
+                    <h2>Create New Volunteer</h2>
                     <hr/>
-                    <label for="new_volunteer_name">New Volunteer Name:</label>
-                    <input id="new_volunteer_name" type="text"/>
-                    <label for="new_volunteer_hours">New Volunteer Hours:</label>
-                    <input id="new_volunteer_hours" type="number"/><br/>
-                    <button id="new_volunteer_button" type="button">Create New Volunteer</button>
+                    <div class="splitport_even">
+                        <label for="new_volunteer_name">Name:</label>
+                        <input id="new_volunteer_name" type="text"/>
+                        <br/>
+                        <label for="new_volunteer_hours">Hours:</label>
+                        <input id="new_volunteer_hours" type="number"><br/>
+                    </div>
+                    <div>
+                        <label for="new_volunteer_opprotunity">Event Description:</label><br/>
+                        <input id="new_volunteer_opprotunity" type="text">
+                    </div><br/>
+                    <div>
+                        <label for="new_event_date">Event Date:</label>
+                        <input id="new_event_date" type="date" title="Event Date">
+                    </div>
+                    <button id="new_volunteer_button">Create New Volunteer!</button>
                 </form>
             </section>
             <section id="data_content">

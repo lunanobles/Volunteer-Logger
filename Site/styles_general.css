@@ -90,6 +90,23 @@ main {
             & .more_info {
                 font-size: 5px;
             }
+
+
+
+            /*Table sub-table*/
+            & table {
+                
+                margin-bottom: 20px;
+                padding-left: 10px;
+                font-size: 85%;
+                color: var(--palette-text-muted);
+
+                & *.table_more_info {
+                    width: 100%;
+                }
+            
+            }
+
         }
     }
 }

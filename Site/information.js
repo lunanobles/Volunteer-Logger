@@ -8,8 +8,10 @@ var event_date_box = document.getElementById("event_date");
 var event_desc_box = document.getElementById("volunteer_opprotunity");
 var new_name = document.getElementById("new_volunteer_name");
 var new_hours = document.getElementById("new_volunteer_hours");
+var new_event_date_box = document.getElementById("new_event_date");
+var new_event_desc_box = document.getElementById("new_volunteer_opprotunity");
 var add_button = document.getElementById("add_to_volunteer_button");
-//var create_button = document.getElementById("new_volunteer_button");
+var create_button = document.getElementById("new_volunteer_button");
 //var delete_button = document.getElementById("delete_volunteer_button");
 var download_button = document.getElementById("download_button");
 var table_body = document.getElementById("volunteers_table_body");
@@ -75,13 +77,13 @@ const PHP_URL = "./server_side.php";
         }
 
 
-        location.reload(); // Update the table by refershing and getting data again
+        //location.reload(); // Update the table by refershing and getting data again
 
     });
 
 
     /**
-     * On click of the override-volunter-hours button, we edit and update the data in the JSON.
+     * On click of the override-volunteer-hours button, we edit and update the data in the JSON.
      */
 //    override_button.addEventListener("click", async event => {
 //        
@@ -89,11 +91,56 @@ const PHP_URL = "./server_side.php";
 
 
     /**
-     * On click of the override-volunter-hours button, we create a new volunteer and add it to the JSON.
+     * On click of the create-new-volunteer button, we create a new volunteer and add it to the JSON.
      */
-//    create_button.addEventListener("click", async event => {
-//        
-//    });
+    create_button.addEventListener("click", async event => {
+
+        const current_volunteer = new_name.value;
+        const event_hours       = parseFloat(new_hours.value);
+        const event_date        = new_event_date_box.value;
+        const event_description = new_event_desc_box.value;
+        const log_name          = logger_signin.value;
+        const log_date          = new Date().toLocaleDateString();
+
+        //const new_entry = {[event_hours, event_description, event_date, log_date, log_name]};
+
+        // Grab fresh data
+        const all_volunteers = await GetJSONData(JSON_URL_VOLUNTEERS);
+
+        // Edit data
+        all_volunteers.push({
+            [current_volunteer]:[
+                [event_hours],
+                [event_description],
+                [event_date],
+                [log_date],
+                [log_name]
+            ]
+        });
+
+        // Return edited data
+                                  // I wrote my own PHP handler for the POST HTTP
+        const response = await fetch('server_side.php', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(all_volunteers)
+        });
+
+        // Check the response from PHP
+        const result = await response.json();
+
+        if (response.ok && result.status === "success") { // If everything is good
+            test_el.innerText += "Successfully updated via XAMPP Apache!" + "\nNew Data: " + JSON.stringify(all_volunteers);
+        } else { // If stuff failed :(
+            test_el.innerText += "Server Error: " + result.message;
+        }
+
+
+        //location.reload(); // Update the table by refershing and getting data again
+
+    });
 
 
     download_button.addEventListener("click", async event => {
@@ -146,7 +193,7 @@ const PHP_URL = "./server_side.php";
 
 
 
-    //! Current Workpoint
+    
 
     // Heavy commenting because OMG JS IS **NOT** C#... AT ALL
 
@@ -230,7 +277,7 @@ const PHP_URL = "./server_side.php";
             </tr>
             <tr id="${detail_row_ID}" class="event_row">
                 <td colspan="3">
-                    <div class="more_info">
+                    <div class="table_more_info">
                         ${per_event_HTML /*this creates a whole bunch of rows of events*/}
                     </div>
                 </td>
@@ -243,6 +290,8 @@ const PHP_URL = "./server_side.php";
     }
 
 
+
+    test_el.innerText = "JS finished";
 
 
 
@@ -268,7 +317,6 @@ const PHP_URL = "./server_side.php";
         // Returns an object
         return volunteers_json;
     }
-
 
 })()
 
