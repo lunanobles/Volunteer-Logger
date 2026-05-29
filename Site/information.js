@@ -72,6 +72,12 @@ const PHP_URL = "./server_side.php";
 
         if (response.ok && result.status === "success") { // If everything is good
             test_el.innerText += "Successfully updated via XAMPP Apache!" + "\nNew Data: " + JSON.stringify(all_volunteers);
+
+            setTimeout(() => {
+                location.reload(); // reload the page to update the table
+            }, 10000); // wait 10sec to allow for seeing the success message
+                       // and so the data can be parsed in time
+
         } else { // If stuff failed :(
             test_el.innerText += "Server Error: " + result.message;
         }
@@ -95,28 +101,35 @@ const PHP_URL = "./server_side.php";
      */
     create_button.addEventListener("click", async event => {
 
+        event.preventDefault(); // Tells the button to not do the defualt, but act based on the code below
+
         const current_volunteer = new_name.value;
         const event_hours       = parseFloat(new_hours.value);
         const event_date        = new_event_date_box.value;
         const event_description = new_event_desc_box.value;
-        const log_name          = logger_signin.value;
         const log_date          = new Date().toLocaleDateString();
+        const log_name          = logger_signin.value;
 
         //const new_entry = {[event_hours, event_description, event_date, log_date, log_name]};
+
+
+        //? I'd like to do an if check here for when we are in Design V3,
+        //? where the user can select a dropdown of volunteers, OR, seemlessly,
+        //? create a new one by selecting "New..." and entering a name
 
         // Grab fresh data
         const all_volunteers = await GetJSONData(JSON_URL_VOLUNTEERS);
 
         // Edit data
-        all_volunteers.push({
-            [current_volunteer]:[
-                [event_hours],
-                [event_description],
-                [event_date],
-                [log_date],
-                [log_name]
+        all_volunteers[current_volunteer] = [
+            [
+                event_hours,
+                event_description,
+                event_date,
+                log_date,
+                log_name
             ]
-        });
+        ];
 
         // Return edited data
                                   // I wrote my own PHP handler for the POST HTTP
@@ -133,6 +146,12 @@ const PHP_URL = "./server_side.php";
 
         if (response.ok && result.status === "success") { // If everything is good
             test_el.innerText += "Successfully updated via XAMPP Apache!" + "\nNew Data: " + JSON.stringify(all_volunteers);
+
+            setTimeout(() => {
+                location.reload(); // reload the page to update the table
+            }, 10000); // wait 10sec to allow for seeing the success message
+                       // and so the data can be parsed in time
+
         } else { // If stuff failed :(
             test_el.innerText += "Server Error: " + result.message;
         }
