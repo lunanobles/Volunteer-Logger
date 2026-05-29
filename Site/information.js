@@ -20,49 +20,20 @@ const JSON_URL_LOGGERS = "../Database/loggers.json";
 const PHP_URL = "./server_side.php";
 
 
-/// NEED TO REFORMAT
-/* 1. addEventListener,
-   2. fetch data,
-   3. helper functions
-   in that order */ 
-
 (async function() {
 
-    
-    const data_volunteers   = await GetJSONData(JSON_URL_VOLUNTEERS);
-    const volunteers        = await Object.keys(data_volunteers);
-    const data_loggers      = await GetJSONData(JSON_URL_LOGGERS);
-    const loggers           = await Object.keys(data_loggers);
-
-    // Make a new option for each volunteer and logger in .jsons
-    name_dropdown.innerHTML = "<option>..new pick..</option>";
-    logger_signin.innerHTML = "<option>... Not Signed In ...</option>";
-
-    for (let i = 0; i < volunteers.length; i++)
-        name_dropdown.innerHTML += `<option>${volunteers[i]}</option>`;
-
-    for (let i = 0; i < loggers.length; i++)
-        logger_signin.innerHTML += `<option>${loggers[i]}</option>`;
 
 
 
-    /**
-     * Finds and returns a JSON file at url as a JSON.parse
-     * @param {string} url 
-     * @returns A JSON.stringify() of the data found at `url`
-     */
-    async function GetJSONData(url) {
-        // Get the JSON promise response
-        const response = await fetch(url);
-        // If the network can't find the file, throw and error
-        // If this is thrown, the locator/directory is likely messed up --> fetch("<HERE>")
-        if (!response.ok) {throw new Error('Error from network!');} 
-        // Convert the response into a JS object
-        const volunteers_json = await response.json();
-        // Returns an object
-        return volunteers_json;
-    }
-    
+
+
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~//
+    /// AddEventListener()s! ///
+    //~~~~~~~~~~~~~~~~~~~~~~~~//
+
+
+
     /**
      * On click of the add-to-volunter-hours button, we edit and update the data in the JSON.
      */
@@ -140,6 +111,62 @@ const PHP_URL = "./server_side.php";
         // Clean up
         URL.revokeObjectURL(url);
     })
+
+
+
+
+
+
+
+    //~~~~~~~~~~~~~~~~~~//
+    /// Fetching Data! ///
+    //~~~~~~~~~~~~~~~~~~//
+
+
+
+    const data_volunteers   = await GetJSONData(JSON_URL_VOLUNTEERS);
+    const volunteers        = await Object.keys(data_volunteers);
+    const data_loggers      = await GetJSONData(JSON_URL_LOGGERS);
+    const loggers           = await Object.keys(data_loggers);
+
+    // Make a new option for each volunteer and logger in .jsons
+    name_dropdown.innerHTML = "<option>..new pick..</option>";
+    logger_signin.innerHTML = "<option>... Not Signed In ...</option>";
+
+    for (let i = 0; i < volunteers.length; i++)
+        name_dropdown.innerHTML += `<option>${volunteers[i]}</option>`;
+
+    for (let i = 0; i < loggers.length; i++)
+        logger_signin.innerHTML += `<option>${loggers[i]}</option>`;
+
+
+
+
+
+
+
+    //~~~~~~~~~~~~~~~~~~~~~//
+    /// Helper Functions! ///
+    //~~~~~~~~~~~~~~~~~~~~~//
+
+
+
+    /**
+     * Finds and returns a JSON file at url as a JSON.parse
+     * @param {string} url 
+     * @returns A JSON.stringify() of the data found at `url`
+     */
+    async function GetJSONData(url) {
+        // Get the JSON promise response
+        const response = await fetch(url);
+        // If the network can't find the file, throw and error
+        // If this is thrown, the locator/directory is likely messed up --> fetch("<HERE>")
+        if (!response.ok) {throw new Error('Error from network!');} 
+        // Convert the response into a JS object
+        const volunteers_json = await response.json();
+        // Returns an object
+        return volunteers_json;
+    }
 
 
 })()
