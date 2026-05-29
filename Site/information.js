@@ -152,7 +152,7 @@ const PHP_URL = "./server_side.php";
 
     let volunteer_index = 0; // Not using a for loop's i because I want to use this var for ID naming
 
-    for (const [volunteer_name,                events] of Object.entries())
+    for (const [volunteer_name,                events] of Object.entries(data_volunteers))
              // ^ current volunteer's name     ^ [[],...] of event details //
     {
 
@@ -170,9 +170,9 @@ const PHP_URL = "./server_side.php";
         ` 
             <table class="table_details">
                 <tr>
-                    <th>
-                    <th>
-                    <th>
+                    <th>Name & Event Desc.</th>
+                    <th>Date</th>
+                    <th>Hours</th>
                 </tr>
         `;
 
@@ -224,7 +224,7 @@ const PHP_URL = "./server_side.php";
             </tr>
         `;
 
-        table_body.insertAdjacentElement('beforeend', per_volunteer_HTML); // place the new data at the end
+        table_body.insertAdjacentHTML('beforeend', per_volunteer_HTML); // place the new data at the end
 
         volunteer_index++; // start everything over with the next volunteer
     }
