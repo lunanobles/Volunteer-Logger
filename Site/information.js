@@ -12,6 +12,7 @@ var add_button = document.getElementById("add_to_volunteer_button");
 //var create_button = document.getElementById("new_volunteer_button");
 //var delete_button = document.getElementById("delete_volunteer_button");
 var download_button = document.getElementById("download_button");
+var table_body = document.getElementById("volunteers_table_body");
 
 
 /// Data Variables
@@ -120,6 +121,7 @@ const PHP_URL = "./server_side.php";
 
     //~~~~~~~~~~~~~~~~~~//
     /// Fetching Data! ///
+    /// Editing HTML!  ///
     //~~~~~~~~~~~~~~~~~~//
 
 
@@ -140,6 +142,92 @@ const PHP_URL = "./server_side.php";
         logger_signin.innerHTML += `<option>${loggers[i]}</option>`;
 
 
+
+    //! Current Workpoint
+
+    // Heavy commenting because OMG JS IS **NOT** C#... AT ALL
+
+    // Creating the table elements
+    table_body.innerHTML = ""; // Remove any placeholder data and whatnot
+
+    let volunteer_index = 0; // Not using a for loop's i because I want to use this var for ID naming
+
+    for (const [volunteer_name,                events] of Object.entries())
+             // ^ current volunteer's name     ^ [[],...] of event details //
+    {
+
+        //* Getting total hours for this volunteer
+        const total_hours = events.reduce((total, current_event) => {
+            return total + Number(current_event[0])
+        }, 0); // reduce() is a bit of foreign function to me, but it seems to work, so I won't question it
+
+
+
+        //* Creating a new sub-table for the dropdown portion of the content (IT WEIRD ToT)
+        // Building the sub-table FIRST to have the data prepared to embed into the overall one
+        // make the header
+        var per_event_HTML = 
+        ` 
+            <table class="table_details">
+                <tr>
+                    <th>
+                    <th>
+                    <th>
+                </tr>
+        `;
+
+        events.forEach(event => {
+            // events is an array of arrays of data
+            // for every event in events,
+            // there is an array that had hours, desc, and date -- as per the JSON
+            const hours = event[0];       // hours from THIS event
+            const description = event[1]; // desc of this event
+            const date = event[2];        // date of this event
+            // event[] is in this order because of the JSON order
+            //// event[3] is Log Date()
+
+            per_event_HTML += 
+            // this creates a new row for every event any one volunteer has
+            `
+                <tr>
+                    <td>${description}</td>
+                    <td>${date}</td>
+                    <td>${hours}</td>
+                </tr>
+            `; 
+        });
+
+        per_event_HTML +=  `</table`; // close the table
+
+
+
+        //* Constructing the actual main/overview table row
+        const detail_row_ID = `details-${volunteer_index}`; // define a unique ID for each volunteer
+        
+        const per_volunteer_HTML = 
+        `
+            <tr class="volunteer_row">
+                <td>${volunteer_name}</td>
+                <td>${total_hours.toFixed(2) /*this is number:D2 in C#*/}</td>
+                <td>
+                    <button type="button" onclick="toggle_events_details('${detail_row_ID  /*this function is PER VOLUNTEER!!!! :D*/}')"
+                        <span class="material-symbols-rounded">arrow_drop_down</span>
+                    </button>
+                </td>
+            </tr>
+            <tr id="${detail_row_ID}" class="event_row">
+                <td colspan="3">
+                    <div class="more_info">
+                        ${per_event_HTML /*this creates a whole bunch of rows of events*/}
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        table_body.insertAdjacentElement('beforeend', per_volunteer_HTML); // place the new data at the end
+
+        volunteer_index++; // start everything over with the next volunteer
+    }
 
 
 
@@ -170,3 +258,17 @@ const PHP_URL = "./server_side.php";
 
 
 })()
+
+
+// This is the toggle function for individual volunteer's event data
+// Placed outside of async all function to avoid errors
+function toggle_events_details(row_ID)
+{
+    const more_information = document.getElementById(row_ID); // this is where making an ID for every element helps us!
+
+    if (more_information.style.display === "none") // if not showing
+    // I put "none" first because that is the starting case
+        more_information.style.display = "table-row"; // show it
+    else
+        more_information.style.display = "none"; // otherwise, hide it
+}
