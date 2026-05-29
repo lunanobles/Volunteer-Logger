@@ -150,6 +150,13 @@ const PHP_URL = "./server_side.php";
     // Creating the table elements
     table_body.innerHTML = ""; // Remove any placeholder data and whatnot
 
+
+    if (!data_volunteers) // if the data isn't loading
+    {
+        table_body.innerHTML = `<tr><td colspan="3">Loading Volunteer Data...</td></tr>`;
+    }
+
+
     let volunteer_index = 0; // Not using a for loop's i because I want to use this var for ID naming
 
     for (const [volunteer_name,                events] of Object.entries(data_volunteers))
@@ -169,11 +176,14 @@ const PHP_URL = "./server_side.php";
         var per_event_HTML = 
         ` 
             <table class="table_details">
-                <tr>
-                    <th>Name & Event Desc.</th>
-                    <th>Date</th>
-                    <th>Hours</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Event Description</th>
+                        <th>Date</th>
+                        <th>Hours</th>
+                    </tr>
+                </thead>
+                <tbody>
         `;
 
         events.forEach(event => {
@@ -197,7 +207,7 @@ const PHP_URL = "./server_side.php";
             `; 
         });
 
-        per_event_HTML +=  `</table`; // close the table
+        per_event_HTML +=  `</tbody></table>`; // close the table
 
 
 
@@ -210,7 +220,7 @@ const PHP_URL = "./server_side.php";
                 <td>${volunteer_name}</td>
                 <td>${total_hours.toFixed(2) /*this is number:D2 in C#*/}</td>
                 <td>
-                    <button type="button" onclick="toggle_events_details('${detail_row_ID  /*this function is PER VOLUNTEER!!!! :D*/}')"
+                    <button type="button" onclick="toggle_events_details('${detail_row_ID  /*this function is PER VOLUNTEER!!!! :D*/}')">
                         <span class="material-symbols-rounded">arrow_drop_down</span>
                     </button>
                 </td>
