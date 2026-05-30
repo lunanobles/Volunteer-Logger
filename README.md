@@ -29,8 +29,16 @@ I hope you enjoy using it!
 
 
 ## Changelog (2.0 Family Only)
+#### 2.0-alpha.3 - Design I
+> - ...
+#### 2.0-alpha.2 — Design Preparations
+> - Published May 30th, 2026
+> - Added Apercu Pro fontface, FBLA brand font.
+> - Added FBLA full logo and FBLA crest images.
+> - Edited font and general CSS stylesheets to accomodate font changes.
+> - (Drafted & sketched new design version.)
 #### 2.0-alpha.1
-> - Published May 29th, 2026
+> - Published [May 29th, 2026](https://github.com/lunanobles/Volunteer-Logger/commit/8f9002cfe9617c74b4307a468f1fcc771f7e7401)
 > - Creating this very README!
 > - Initiated the branch for the 2.0 development.
 #### 1.0
