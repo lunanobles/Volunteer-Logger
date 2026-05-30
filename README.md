@@ -29,10 +29,13 @@ I hope you enjoy using it!
 
 
 ## Changelog (1.0 Family Only)
-#### 1.1
-> - Published May 29th, 2026
+#### 1.2 -- Cleaning Up Old Files 📍
+> - Published May 30th, 2026
+> - Deleted defunct.js, information_try_2.js, and information_try_3.js files.
+#### 1.1 -- README Basics
+> - Published [May 29th, 2026](https://github.com/lunanobles/Volunteer-Logger/commit/01985750aee6a283a8301254991d04c429daade1)
 > - Creating this very README!
-#### 1.0
+#### 1.0 -- Product Launch With Full Functionality (And more to come!)
 > - <b>Release Version</b>
 > - Published [May 29th, 2026](https://github.com/lunanobles/Volunteer-Logger/commit/4fbdf74e5b50fab45c44af722c2dfe72bf7091b4)
 > - With pre-existing JSON data, add an event [hours, desc., date of event, date of log, and who logged it] to any volunteer via a dropdown menu!
