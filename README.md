@@ -1,16 +1,40 @@
 # Volunteer Logger
 #### [Luna Nobles](https://github.com/lunanobles)
 
+This project is built for the Future Business Leaders of America (FBLA) at the ATC.
 
-<br/>
+This project is a HTML interface website for creating volunteer data.
+This has tested my skills in JavaScript and forced me to learn some PHP and HTTP requests, making this, certainly, a difficult project!
 
-## Changelog
+I hope you enjoy using it!
 
-> #### 0.3.0 — Design!
-> - ~ f u t r e ~
+## Roadmap
+##### [Trello Board](https://trello.com/b/SJDsTr3M)
+<div style="display: flex; justify-content: even; color: beige; flex-wrap: wrap; max-width: 1000px">
+    <section style="background-color: indigo; width: 33%; min-width: 300px; margin: 5px; padding: 2px; text-align: center;">
+        <h3 style="color: white;">Getting to Version 1.0</h3>
+        <p>Through versions 0.0.1 up to version 0.3.19 (37 commits total!), I worked to create the functionality of all the different actions! HTTP handling with PHP, JSON parsing and editing with JavaScript, the works!</p>
+    </section>
+    <section style="background-color: indigo; width: 30%; min-width: 300px; margin: 5px; padding: 2px; text-align: center;">
+        <h6 style="color: gainsboro;">Currently Here (Background)</h6>
+        <h3 style="color: white;">Working on Version 1.0</h3>
+        <p>In the Main branch, I will maintain 1.0 and its functionality, but I will not add any new features to this version.</p>
+    </section>
+    <section style="background-color: indigo; width: 30%; min-width: 300px; margin: 5px; padding: 2px; text-align: center;">
+        <h6 style="color: gainsboro;">Currently Here (Focus)</h6>
+        <h3 style="color: white;">Getting to Version 2.0</h3>
+        <p>In a split branch (that, when finished, will become the Main branch), I will be working on a new version that overhuals the design and layout. A big change will be merging the "New Volunteer" and "Add to Volunteer" forms into one!</p>
+    </section>
+</div>
 
 
-> #### Old Versions &mdash; No Documentation :/
-> 138e86162884f3040a50f1d19f28cc8412e25363
-> 138e861
-> [Create index.html -- 0.0.1](138e86162884f3040a50f1d19f28cc8412e25363)
+## Changelog (1.0 Family Only)
+#### 1.1
+> - Published May 29th, 2026
+> - Creating this very README!
+#### 1.0
+> - <b>Release Version</b>
+> - Published [May 29th, 2026](https://github.com/lunanobles/Volunteer-Logger/commit/4fbdf74e5b50fab45c44af722c2dfe72bf7091b4)
+> - With pre-existing JSON data, add an event [hours, desc., date of event, date of log, and who logged it] to any volunteer via a dropdown menu!
+> - Create a new volunteer with a starting event via a simular form!
+> - View the data is a easy to read table!
