@@ -348,7 +348,8 @@ function toggle_events_details(row_ID)
 {
     const more_information = document.getElementById(row_ID); // this is where making an ID for every element helps us!
 
-    if (more_information.style.display === "none") // if not showing
+    if (more_information.style.display === "none" ||
+        more_information.style.display === "") // if not showing
     // I put "none" first because that is the starting case
         more_information.style.display = "table-row"; // show it
     else

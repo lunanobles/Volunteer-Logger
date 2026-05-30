@@ -29,10 +29,13 @@ I hope you enjoy using it!
 
 
 ## Changelog (2.0 Family Only)
-#### 2.0-alpha.4 — Design II
+#### 2.0-alpha.5 — Design III
 > - Planned to stylise the buttons and input fields.
-#### 2.0-alpha.3 — Design I 📍
+#### 2.0-alpha.4 — Design II 📍
 > - Published May 30th, 2026
+> - Created new table look.
+#### 2.0-alpha.3 — Design I
+> - Published [May 30th, 2026](d38834fd47483002d7b09e204dbfee2ad1e8f6ab)
 > - New colour palette for both light and dark modes.
 > - Restyled major content to Sajid UI style.
 > - Created Delete form.
