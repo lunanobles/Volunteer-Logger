@@ -24,49 +24,51 @@
         <h1>Volunteer Hours Logger</h1>
         <main class="splitport_even">
             <section id="forms_content">
-                <label for="form_selector_button">Add to existing or create new volunteer.</label>
-                <input id="form_selector_button" type="checkbox">
-                <form id="form_existing_volunteer">
-                    <h2>Add Hours</h2>
+                <form id="form_volunteer">
+                    <h2>Create a new event/volunteer</h2>
                     <hr/>
+                    <div id="name_input_area">
+                        <h3 for="volunteer_names">Name:</h3>
+                        <div class="indent">
+                            <select id="volunteer_names" title="Select a volunteer's name from the list to begin...">
+                                <option selected disabled>...pick a name</option>
+                                <option>test</option>
+                            </select>
+                            <input id="volunteer_names_new" type="text" placeholder="New Volunteer Name..." title="Select '...New Volunteer...' to use this..." disabled/>
+                        </div>
+                    </div>
                     <div class="splitport_even">
-                        <label for="volunteer_names">Name:</label>
-                        <select id="volunteer_names">
-                            <option selected disabled>...pick a name</option>
-                            <option>test</option>
-                        </select><br/>
-                        <label for="volunteer_hours">Hours</label>
-                        <input id="volunteer_hours" type="number"><br/>
+                        <div>
+                            <div class="event_details event_details_left">
+                                <label for="volunteer_hours">Hours:</label><br/>
+                                <input id="volunteer_hours" type="number" class="indent"><br/>
+                            </div>
+                            <div class="event_details event_details_left">
+                                <label for="event_date">Event Date:</label><br/>
+                                <input id="event_date" type="date" title="Event Date" class="indent">
+                            </div>
+                        </div>
+                        <div class="event_details event_details_right">
+                            <label for="volunteer_opprotunity">Event Type:</label><br/>
+                            <div>
+                                <select id="volunteer_opprotunity">
+                                    <option selected disabled>...Select an Event...</option>
+                                    <option>test</option>
+                                </select>
+                                <input id="volunteer_opprotunity_new" type="text" title="Select '...New Event...' from the dropdown to use this..." disabled>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label for="volunteer_opprotunity">Event Description</label><br/>
-                        <input id="volunteer_opprotunity" type="text">
-                    </div>
-                    <div>
-                        <label for="event_date">Event Date:</label>
-                        <input id="event_date" type="date" title="Event Date">
-                    </div>
-                    <button id="add_to_volunteer_button" type="button">Add To Volunteer</button>
+                    <button id="add_to_volunteer_button" type="button">Submit</button>
                 </form>
-                <form id="form_new_volunteer">
-                    <h2>Create New Volunteer</h2>
-                    <hr/>
-                    <div class="splitport_even">
-                        <label for="new_volunteer_name">Name:</label>
-                        <input id="new_volunteer_name" type="text"/>
-                        <br/>
-                        <label for="new_volunteer_hours">Hours:</label>
-                        <input id="new_volunteer_hours" type="number"><br/>
-                    </div>
-                    <div>
-                        <label for="new_volunteer_opprotunity">Event Description:</label><br/>
-                        <input id="new_volunteer_opprotunity" type="text">
-                    </div><br/>
-                    <div>
-                        <label for="new_event_date">Event Date:</label>
-                        <input id="new_event_date" type="date" title="Event Date">
-                    </div>
-                    <button id="new_volunteer_button">Create New Volunteer!</button>
+                <form id="form_delete">
+                    <p>Hidden by defualt.</p>
+                    <h3 for="event_to_delete_dropdown">Delete an event:</h3>
+                    <select id="event_to_delete_dropdown" title="Select an event to delete from the volunteers history...">
+                        <option selected disabled>...Select an Event...</option>
+                        <option>test</option>
+                    </select>
+                    <button type="button" id="delete_event_confirm_button">Delete</button>
                 </form>
             </section>
             <section id="data_content">

@@ -1,20 +1,45 @@
 :root {
+    /*FBLA*/   /*<-- Avoid using these generally, they are not color-pref dependent!*/
     --palette-FBLA-primary:   hsl(222, 85%, 27%);
     --palette-FBLA-secondary: hsl(220, 73%, 43%);
     --palette-FBLA-accent:    hsl(040, 91%, 53%);
 
-    --palette-background:  hsl(0, 0%,  1%);
-    --palette-foreground:  hsl(0, 0%, 15%);
-    --palette-text-bold:   hsl(0, 0%, 99%);
-    --palette-text-muted:  hsl(0, 0%, 80%);
+    /*Background & General Content Sections*/
+    --palette-canvas-background:  hsl(228, 100%, 4%);
+    --palette-content-background: hsl(212, 100%, 6%);
+    --palette-content-foreground: hsl(203, 100%, 9%);
+
+    /*Text*/
+    --palette-text-bold:  hsl(180, 100%, 82%);
+    --palette-text-muted: hsl(195, 66%, 63%);
+
+    /*Highlight & Border*/
+    --palette-highlight: hsl(196, 100%, 30%);
+    --palette-border:    hsl(200, 100%, 25%);
+
+    /*Semantics*/
+    --palette-danger:  hsl(8, 73%, 66%);
+    --palette-success: hsl(154, 54%, 47%);
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        --palette-background:  hsl(0, 0%, 85%);
-        --palette-foreground:  hsl(0, 0%, 99%);
-        --palette-text-bold:   hsl(0, 0%, 01%);
-        --palette-text-muted:  hsl(0, 0%, 15%);
+        /*Background & General Content Sections*/
+        --palette-canvas-background:  hsl(192, 100%, 85%);
+        --palette-content-background: hsl(182, 100%, 87%);
+        --palette-content-foreground: hsl(180, 100%, 90%);
+
+        /*Text*/
+        --palette-text-bold:  hsl(226, 100%, 10%);
+        --palette-text-muted: hsl(200, 100%, 25%);
+
+        /*Highlight & Border*/
+        --palette-highlight: hsl(180, 100%, 75%);
+        --palette-border:    hsl(193, 100%, 37%);
+
+        /*Semantics*/
+        --palette-danger:  hsl(7, 55%, 41%);
+        --palette-success: hsl(154, 100%, 24%);
     }
 }
 
@@ -28,7 +53,7 @@ body {
     font-family: "Apercu Pro", sans-serif;
     font-size: 1em;
     color: var(--palette-text-muted);
-    background-color: var(--palette-background);
+    background-color: var(--palette-canvas-background);
     & h1,
     & h2,
     & h3 {
@@ -37,15 +62,22 @@ body {
 }
 
 main {
-    & > section {
+    & > section#forms_content {
+        width: 60vw;
+        height: 80vh;
+
+        /* Designing the data editing box*/
         & > form {
-            background-color: var(--palette-foreground);
+            /*Technical and Sizing*/
             justify-self: center;
-            border: 0.5vw solid var(--palette-FBLA-primary);
-            border-radius:  5px;
-            padding: 5px;
-            width: 90%;
             max-width: 700px;
+            width: 90%;
+            padding: 5px;
+            /*Background, Text, and Border*/
+            background-color: var(--palette-content-foreground);
+            border: 1px solid var(--palette-border);
+            border-radius:  5px;
+
             & hr {
                 background-color: var(--palette-FBLA-accent);
                 border: none;
@@ -55,14 +87,22 @@ main {
                 margin-bottom: 1vh;
             }
         }
+
+    }
+
+    & > section#data_content {
+
+        width: 40vw;
+        height: 80vh;
+
         & > h3 {
             justify-self: center;
         }
         & > table {
             width: 90%;
             justify-self: center;
-            background-color: var(--palette-foreground);
-            border: 0.5vw solid var(--palette-FBLA-primary);
+            background-color: var(--palette-content-foreground);
+            border: 1px solid var(--palette-border);
             border-radius:  5px;
             padding: 5px;
             & thead {
@@ -104,16 +144,9 @@ main {
                 & *.table_more_info {
                     width: 100%;
                 }
-            
             }
-
         }
     }
-}
-
-main section#forms_content {
-    width: 75%;
-    height: 80vh;
 }
 
 .splitport_even {
@@ -122,4 +155,8 @@ main section#forms_content {
     & > * {
         width: 50%;
     }
+}
+
+.indent {
+    margin-left: 5%;
 }

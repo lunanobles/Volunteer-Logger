@@ -1,20 +1,21 @@
 /// VARIABLES ///
 /// Document Variables
-var test_el = document.getElementById("test_string");
-var name_dropdown = document.getElementById("volunteer_names");
-var logger_signin = document.getElementById("sign_in");
-var hours_numeric = document.getElementById("volunteer_hours");
-var event_date_box = document.getElementById("event_date");
-var event_desc_box = document.getElementById("volunteer_opprotunity");
-var new_name = document.getElementById("new_volunteer_name");
-var new_hours = document.getElementById("new_volunteer_hours");
-var new_event_date_box = document.getElementById("new_event_date");
-var new_event_desc_box = document.getElementById("new_volunteer_opprotunity");
-var add_button = document.getElementById("add_to_volunteer_button");
-var create_button = document.getElementById("new_volunteer_button");
+var test_el         = document.getElementById("test_string");
+var name_dropdown   = document.getElementById("volunteer_names");
+var name_custom     = document.getElementById("volunteer_names_new");
+var logger_signin   = document.getElementById("sign_in");
+var hours_numeric   = document.getElementById("volunteer_hours");
+var event_date_box  = document.getElementById("event_date");
+var event_desc_box  = document.getElementById("volunteer_opprotunity");
+//var new_name = document.getElementById("new_volunteer_name");
+//var new_hours = document.getElementById("new_volunteer_hours");
+//var new_event_date_box = document.getElementById("new_event_date");
+//var new_event_desc_box = document.getElementById("new_volunteer_opprotunity");
+var add_button      = document.getElementById("add_to_volunteer_button");
+//var create_button = document.getElementById("new_volunteer_button");
 //var delete_button = document.getElementById("delete_volunteer_button");
 var download_button = document.getElementById("download_button");
-var table_body = document.getElementById("volunteers_table_body");
+var table_body      = document.getElementById("volunteers_table_body");
 
 
 /// Data Variables
@@ -99,67 +100,67 @@ const PHP_URL = "./server_side.php";
     /**
      * On click of the create-new-volunteer button, we create a new volunteer and add it to the JSON.
      */
-    create_button.addEventListener("click", async event => {
+    // create_button.addEventListener("click", async event => {
 
-        event.preventDefault(); // Tells the button to not do the defualt, but act based on the code below
+    //     event.preventDefault(); // Tells the button to not do the defualt, but act based on the code below
 
-        const current_volunteer = new_name.value;
-        const event_hours       = parseFloat(new_hours.value);
-        const event_date        = new_event_date_box.value;
-        const event_description = new_event_desc_box.value;
-        const log_date          = new Date().toLocaleDateString();
-        const log_name          = logger_signin.value;
+    //     const current_volunteer = new_name.value;
+    //     const event_hours       = parseFloat(new_hours.value);
+    //     const event_date        = new_event_date_box.value;
+    //     const event_description = new_event_desc_box.value;
+    //     const log_date          = new Date().toLocaleDateString();
+    //     const log_name          = logger_signin.value;
 
-        //const new_entry = {[event_hours, event_description, event_date, log_date, log_name]};
-
-
-        //? I'd like to do an if check here for when we are in Design V3,
-        //? where the user can select a dropdown of volunteers, OR, seemlessly,
-        //? create a new one by selecting "New..." and entering a name
-
-        // Grab fresh data
-        const all_volunteers = await GetJSONData(JSON_URL_VOLUNTEERS);
-
-        // Edit data
-        all_volunteers[current_volunteer] = [
-            [
-                event_hours,
-                event_description,
-                event_date,
-                log_date,
-                log_name
-            ]
-        ];
-
-        // Return edited data
-                                  // I wrote my own PHP handler for the POST HTTP
-        const response = await fetch('server_side.php', { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(all_volunteers)
-        });
-
-        // Check the response from PHP
-        const result = await response.json();
-
-        if (response.ok && result.status === "success") { // If everything is good
-            test_el.innerText += "Successfully updated via XAMPP Apache!" + "\nNew Data: " + JSON.stringify(all_volunteers);
-
-            setTimeout(() => {
-                location.reload(); // reload the page to update the table
-            }, 10000); // wait 10sec to allow for seeing the success message
-                       // and so the data can be parsed in time
-
-        } else { // If stuff failed :(
-            test_el.innerText += "Server Error: " + result.message;
-        }
+    //     //const new_entry = {[event_hours, event_description, event_date, log_date, log_name]};
 
 
-        //location.reload(); // Update the table by refershing and getting data again
+    //     //? I'd like to do an if check here for when we are in Design V3,
+    //     //? where the user can select a dropdown of volunteers, OR, seemlessly,
+    //     //? create a new one by selecting "New..." and entering a name
 
-    });
+    //     // Grab fresh data
+    //     const all_volunteers = await GetJSONData(JSON_URL_VOLUNTEERS);
+
+    //     // Edit data
+    //     all_volunteers[current_volunteer] = [
+    //         [
+    //             event_hours,
+    //             event_description,
+    //             event_date,
+    //             log_date,
+    //             log_name
+    //         ]
+    //     ];
+
+    //     // Return edited data
+    //                               // I wrote my own PHP handler for the POST HTTP
+    //     const response = await fetch('server_side.php', { 
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(all_volunteers)
+    //     });
+
+    //     // Check the response from PHP
+    //     const result = await response.json();
+
+    //     if (response.ok && result.status === "success") { // If everything is good
+    //         test_el.innerText += "Successfully updated via XAMPP Apache!" + "\nNew Data: " + JSON.stringify(all_volunteers);
+
+    //         setTimeout(() => {
+    //             location.reload(); // reload the page to update the table
+    //         }, 10000); // wait 10sec to allow for seeing the success message
+    //                    // and so the data can be parsed in time
+
+    //     } else { // If stuff failed :(
+    //         test_el.innerText += "Server Error: " + result.message;
+    //     }
+
+
+    //     //location.reload(); // Update the table by refershing and getting data again
+
+    // });
 
 
     download_button.addEventListener("click", async event => {
@@ -201,14 +202,15 @@ const PHP_URL = "./server_side.php";
     const loggers           = await Object.keys(data_loggers);
 
     // Make a new option for each volunteer and logger in .jsons
-    name_dropdown.innerHTML = "<option>..new pick..</option>";
-    logger_signin.innerHTML = "<option>... Not Signed In ...</option>";
+    name_dropdown.innerHTML = "<option selected disabled>...Select a Volunteer...</option>\n<option>...New Volunteer...</option>";
+    logger_signin.innerHTML = "<option selected disabled>... Not Signed In ...</option>";
 
     for (let i = 0; i < volunteers.length; i++)
         name_dropdown.innerHTML += `<option>${volunteers[i]}</option>`;
 
     for (let i = 0; i < loggers.length; i++)
         logger_signin.innerHTML += `<option>${loggers[i]}</option>`;
+
 
 
 
@@ -352,3 +354,12 @@ function toggle_events_details(row_ID)
     else
         more_information.style.display = "none"; // otherwise, hide it
 }
+
+
+name_dropdown.addEventListener("change", event => {
+    // Enable name_custom if "...New Volunteer..." is selected
+})
+
+name_custom.addEventListener("change", event => {
+    // Check if name already exists and warn if so
+})

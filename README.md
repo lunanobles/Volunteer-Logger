@@ -29,10 +29,17 @@ I hope you enjoy using it!
 
 
 ## Changelog (2.0 Family Only)
-#### 2.0-alpha.3 - Design I
-> - ...
-#### 2.0-alpha.2 — Design Preparations
+#### 2.0-alpha.4 — Design II
+> - Planned to stylise the buttons and input fields.
+#### 2.0-alpha.3 — Design I 📍
 > - Published May 30th, 2026
+> - New colour palette for both light and dark modes.
+> - Restyled major content to Sajid UI style.
+> - Created Delete form.
+> - Adjusted layout of Main form.
+> - Created textboxes for custom additions (non-functional).
+#### 2.0-alpha.2 — Design Preparations
+> - Published [May 30th, 2026](https://github.com/lunanobles/Volunteer-Logger/commit/258a3f7f8b07afbd0e099a65a6db202bf3563fa3)
 > - Added Apercu Pro fontface, FBLA brand font.
 > - Added FBLA full logo and FBLA crest images.
 > - Edited font and general CSS stylesheets to accomodate font changes.
