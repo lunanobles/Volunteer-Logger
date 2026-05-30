@@ -28,10 +28,11 @@ I hope you enjoy using it!
 </div>
 
 
-## Changelog (1.0 Family Only)
-#### 1.1
+## Changelog (2.0 Family Only)
+#### 2.0-alpha.1
 > - Published May 29th, 2026
 > - Creating this very README!
+> - Initiated the branch for the 2.0 development.
 #### 1.0
 > - <b>Release Version</b>
 > - Published [May 29th, 2026](https://github.com/lunanobles/Volunteer-Logger/commit/4fbdf74e5b50fab45c44af722c2dfe72bf7091b4)
