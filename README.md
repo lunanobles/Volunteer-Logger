@@ -29,9 +29,13 @@ I hope you enjoy using it!
 
 
 ## Changelog (2.0 Family Only)
-#### 2.0-alpha.5 — Design III
-> - Planned to stylise the buttons and input fields.
-#### 2.0-alpha.4 — Design II 📍
+#### 2.0-alpha.6
+> - Planned to get the new form working (merging old Add and Create forms into one).
+#### 2.0-alpha.5 — Design III 📍
+> - Published May 30th, 2026
+> - Stylised the buttons and input fields.
+> - Added minimum and step of 0.5 to hours input field.
+#### 2.0-alpha.4 — Design II
 > - Published May 30th, 2026
 > - Created new table look.
 #### 2.0-alpha.3 — Design I

@@ -27,14 +27,14 @@
         /*Background & General Content Sections*/
         --palette-canvas-background:  hsl(192, 100%, 85%);
         --palette-content-background: hsl(182, 100%, 87%);
-        --palette-content-foreground: hsl(180, 100%, 90%);
+        --palette-content-foreground: hsl(180, 100%, 95%);
 
         /*Text*/
         --palette-text-bold:  hsl(226, 100%, 10%);
         --palette-text-muted: hsl(200, 100%, 25%);
 
         /*Highlight & Border*/
-        --palette-highlight: hsl(180, 100%, 75%);
+        --palette-highlight: hsl(180, 60%, 70%);
         --palette-border:    hsl(193, 100%, 37%);
 
         /*Semantics*/
@@ -67,9 +67,14 @@ main {
     & > section#forms_content {
         width: 60vw;
         height: 80vh;
+        position: relative;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
 
         /* Designing the data editing box*/
-        & > form {
+        & form {
             /*Technical and Sizing*/
             display: block;
             justify-self: center;
@@ -91,6 +96,20 @@ main {
             }
         }
 
+        & *#hide_delete_form_wrapper {
+            width: 90%;
+
+            & *.show_hide_switch {
+                position: relative;
+                left: 50%;
+                color: var(--palette-border);
+            }
+        }
+
+        & form#form_delete {
+            width: 50%;
+            display: none;
+        }
     }
 
     & > section#data_content {

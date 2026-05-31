@@ -5,3 +5,54 @@
     height: 5vh;
 }
 
+#name_input_area {
+    margin: 2% 0 4% 0;
+}
+
+
+
+button,
+input,
+select {
+    background-color: var(--palette-content-foreground);
+    color: var(--palette-text-muted);
+    border: none;
+    border-radius: 2px;
+    padding: 2px;
+    margin: 2px;
+    &:not(:disabled):hover {
+        background-color: var(--palette-highlight);
+        color: var(--palette-text-bold);
+        cursor: pointer;
+    }
+    &:disabled {
+        color: var(--palette-border) !important;
+        cursor: not-allowed;
+    }
+
+    &:focus {
+        border: 1px solid var(--palette-FBLA-accent);
+    }
+
+    & > option {
+        &:hover {
+            background-color: var(--palette-highlight);
+            color: var(--palette-text-bold);
+        }
+    }
+}
+
+button#submit_button,
+button#delete_button {
+    width: 20%;
+    height: 5vh;
+    margin-top: 5%;
+
+    &:hover {
+        color: var(--palette-content-foreground);
+        cursor: pointer;
+    }
+
+    &#submit_button:hover {background-color: var(--palette-success);}
+    &#delete_button:hover {background-color: var(--palette-danger);}
+}

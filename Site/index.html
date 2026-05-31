@@ -41,7 +41,7 @@
                         <div>
                             <div class="event_details event_details_left">
                                 <label for="volunteer_hours">Hours:</label><br/>
-                                <input id="volunteer_hours" type="number" class="indent"><br/>
+                                <input id="volunteer_hours" type="number" min="0.5" step="0.5" class="indent"><br/>
                             </div>
                             <div class="event_details event_details_left">
                                 <label for="event_date">Event Date:</label><br/>
@@ -59,17 +59,23 @@
                             </div>
                         </div>
                     </div>
-                    <button id="add_to_volunteer_button" type="button">Submit</button>
+                    <button id="submit_button" type="button">Submit</button>
                 </form>
-                <form id="form_delete">
-                    <p>Hidden by defualt.</p>
-                    <h3 for="event_to_delete_dropdown">Delete an event:</h3>
-                    <select id="event_to_delete_dropdown" title="Select an event to delete from the volunteers history...">
-                        <option selected disabled>...Select an Event...</option>
-                        <option>test</option>
-                    </select>
-                    <button type="button" id="delete_event_confirm_button">Delete</button>
-                </form>
+                <div id="hide_delete_form_wrapper">
+                    <div class="show_hide_switch">
+                        <label for="show_hide_delete_form">Show/Hide Delete Form: </label>
+                        <input id="show_hide_delete_form" type="checkbox" title="Show/Hide Delete Form"/>
+                    </div>
+                    <form id="form_delete">
+                        <p>Hidden by default.</p>
+                        <h3 for="event_to_delete_dropdown">Delete an event:</h3>
+                        <select id="event_to_delete_dropdown" title="Select an event to delete from the volunteers history...">
+                            <option selected disabled>...Select an Event...</option>
+                            <option>test</option>
+                        </select>
+                        <button type="button" id="delete_button">Delete</button>
+                    </form>
+                </div>
             </section>
             <section id="data_content">
                 <h3>Volunteers | <button id="download_button" type="button">Download JSON Data</button></h3>

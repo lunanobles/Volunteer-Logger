@@ -11,7 +11,7 @@ var event_desc_box  = document.getElementById("volunteer_opprotunity");
 //var new_hours = document.getElementById("new_volunteer_hours");
 //var new_event_date_box = document.getElementById("new_event_date");
 //var new_event_desc_box = document.getElementById("new_volunteer_opprotunity");
-var add_button      = document.getElementById("add_to_volunteer_button");
+var submit_button   = document.getElementById("submit_button");
 //var create_button = document.getElementById("new_volunteer_button");
 //var delete_button = document.getElementById("delete_volunteer_button");
 var download_button = document.getElementById("download_button");
@@ -41,7 +41,7 @@ const PHP_URL = "./server_side.php";
     /**
      * On click of the add-to-volunter-hours button, we edit and update the data in the JSON.
      */
-    add_button.addEventListener("click", async event => {
+    submit_button.addEventListener("click", async event => {
     
         const current_volunteer = name_dropdown.value;
         const event_hours       = parseFloat(hours_numeric.value);
