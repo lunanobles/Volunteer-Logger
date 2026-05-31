@@ -6,7 +6,8 @@ var name_custom     = document.getElementById("volunteer_names_new");
 var logger_signin   = document.getElementById("sign_in");
 var hours_numeric   = document.getElementById("volunteer_hours");
 var event_date_box  = document.getElementById("event_date");
-var event_desc_box  = document.getElementById("volunteer_opprotunity");
+var event_dropdown  = document.getElementById("volunteer_opprotunity");
+var event_custom    = document.getElementById("volunteer_opprotunity_new");
 //var new_name = document.getElementById("new_volunteer_name");
 //var new_hours = document.getElementById("new_volunteer_hours");
 //var new_event_date_box = document.getElementById("new_event_date");
@@ -37,7 +38,7 @@ const PHP_URL = "./server_side.php";
     //~~~~~~~~~~~~~~~~~~~~~~~~//
 
 
-
+//#region SUBMIT
     /**
      * On click of the add-to-volunter-hours button, we edit and update the data in the JSON.
      */
@@ -46,9 +47,9 @@ const PHP_URL = "./server_side.php";
         const current_volunteer = name_dropdown.value;
         const event_hours       = parseFloat(hours_numeric.value);
         const event_date        = event_date_box.value;
-        const event_description = event_desc_box.value;
+        const event_description = event_dropdown.value;
         const log_name          = logger_signin.value;
-        const log_date          = new Date().toLocaleDateString();
+        const log_date          = new Date();
 
         const new_entry = [event_hours, event_description, event_date, log_date, log_name];
 
@@ -87,8 +88,9 @@ const PHP_URL = "./server_side.php";
         //location.reload(); // Update the table by refershing and getting data again
 
     });
+//#endregion
 
-
+//#region The old override button
     /**
      * On click of the override-volunteer-hours button, we edit and update the data in the JSON.
      */
@@ -161,8 +163,9 @@ const PHP_URL = "./server_side.php";
     //     //location.reload(); // Update the table by refershing and getting data again
 
     // });
+//#endregion
 
-
+//#region DOWNLOAD
     download_button.addEventListener("click", async event => {
 
         test_el.innerText = "Onclick Activated";
@@ -182,7 +185,7 @@ const PHP_URL = "./server_side.php";
         // Clean up
         URL.revokeObjectURL(url);
     })
-
+//#endregion
 
 
 
@@ -193,7 +196,7 @@ const PHP_URL = "./server_side.php";
     /// Fetching Data! ///
     /// Editing HTML!  ///
     //~~~~~~~~~~~~~~~~~~//
-
+//#region Fetching Data & Editing HTML
 
 
     const data_volunteers   = await GetJSONData(JSON_URL_VOLUNTEERS);
@@ -202,8 +205,9 @@ const PHP_URL = "./server_side.php";
     const loggers           = await Object.keys(data_loggers);
 
     // Make a new option for each volunteer and logger in .jsons
-    name_dropdown.innerHTML = "<option selected disabled>...Select a Volunteer...</option>\n<option>...New Volunteer...</option>";
-    logger_signin.innerHTML = "<option selected disabled>... Not Signed In ...</option>";
+    name_dropdown.innerHTML  = "<option selected disabled>...Select a Volunteer...</option>\n<option>...New Volunteer...</option>";
+    logger_signin.innerHTML  = "<option selected disabled>...Not Signed In...</option>";
+    event_dropdown.innerHTML = "<option selected disabled>...Select an Event...</option>\n<option>...New Event...</option>";
 
     for (let i = 0; i < volunteers.length; i++)
         name_dropdown.innerHTML += `<option>${volunteers[i]}</option>`;
@@ -213,8 +217,31 @@ const PHP_URL = "./server_side.php";
 
 
 
+    // createing new events for the dropdown
 
-    
+    const unique_events = new Set();
+
+    for (const volunteer_name in data_volunteers) /*For each volunteer in the list*/
+    {
+        const event_data = data_volunteers[volunteer_name]; // Get that volunteer's event data
+
+        for (let i = 0; i < event_data.length; i++)
+        {
+            unique_events.add(
+                event_data[i][1] // And add every event to the Set
+            );
+        }
+    }
+
+    unique_events.forEach(event => {
+        event_dropdown.innerHTML += `<option>${event}</option>`; // Add the data to the HTML
+    })
+
+
+
+
+
+    //#region The Table 😭
 
     // Heavy commenting because OMG JS IS **NOT** C#... AT ALL
 
@@ -310,16 +337,17 @@ const PHP_URL = "./server_side.php";
         volunteer_index++; // start everything over with the next volunteer
     }
 
-
+    //#endregion
 
     test_el.innerText = "JS finished";
 
+//#endregion
 
 
     //~~~~~~~~~~~~~~~~~~~~~//
     /// Helper Functions! ///
     //~~~~~~~~~~~~~~~~~~~~~//
-
+//#region Helper Functions!
 
 
     /**
@@ -339,6 +367,47 @@ const PHP_URL = "./server_side.php";
         return volunteers_json;
     }
 
+
+    //#region Checking for overlap in custom textboxes
+
+    name_custom.addEventListener("change", event => {
+        // Check if name already exists and warn if so
+        for (let i = 0; i < volunteers.length; i++)
+        {
+            if (name_custom.value.toLowerCase() === volunteers[i].toLowerCase()) // using toLowerCase() to ingore capitalisation
+            {
+                alert("This volunteer already exists. Use a different name, or select this volunteer from the dropdown.")
+                name_custom.value = ""; // prevent the user from using the name
+            }
+        }
+    })
+
+
+    
+
+    event_custom.addEventListener("change", event => {
+
+        var event_titles = unique_events.keys();
+
+        // Check if event already exists and warn if so
+        for (let i = 0; i < unique_events.size; i++)
+        {
+            var input = event_custom.value;
+            var check = event_titles.next().value;
+
+            if (input.toLowerCase() === check.toLowerCase()) // using toLowerCase() to ingore capitalisation
+            {
+                alert("This event title already exists. Use a different name, or select this event from the dropdown.")
+                event_custom.value = ""; // prevent the user from using the name
+                break; // break to stop checking
+            }
+        }
+    })
+
+    //#endregion
+
+//#endregion
+
 })()
 
 
@@ -357,10 +426,40 @@ function toggle_events_details(row_ID)
 }
 
 
+//#region Active/Inactive custom textboxes
+
 name_dropdown.addEventListener("change", event => {
     // Enable name_custom if "...New Volunteer..." is selected
+    if (name_dropdown.value === "...New Volunteer...")
+    {
+        name_custom.removeAttribute("disabled");
+        name_custom.setAttribute("title", "Create a new volunteer by entering a unique name...");
+        name_custom.setAttribute("placeholder", "Jane Doe");
+    }
+    else
+    {
+        name_custom.setAttribute("disabled", true);
+        name_custom.setAttribute("title", "Select '...New Volunteer...' to use this...");
+        name_custom.setAttribute("placeholder", "...");
+    }
 })
 
-name_custom.addEventListener("change", event => {
-    // Check if name already exists and warn if so
+
+
+event_dropdown.addEventListener("change", event => {
+    // Enable name_custom if "...New Volunteer..." is selected
+    if (event_dropdown.value === "...New Event...")
+    {
+        event_custom.removeAttribute("disabled");
+        event_custom.setAttribute("title", "Create a new volunteer by entering a unique name...");
+        event_custom.setAttribute("placeholder", "Jane Doe");
+    }
+    else
+    {
+        event_custom.setAttribute("disabled", true);
+        event_custom.setAttribute("title", "Select '...New Volunteer...' to use this...");
+        event_custom.setAttribute("placeholder", "...");
+    }
 })
+
+//#endregion

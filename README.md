@@ -29,35 +29,43 @@ I hope you enjoy using it!
 
 
 ## Changelog (2.0 Family Only)
-#### 2.0-alpha.6
-> - Planned to get the new form working (merging old Add and Create forms into one).
-#### 2.0-alpha.5 — Design III 📍
-> - Published May 30th, 2026
+##### 2.0-alpha.7 — Deleting Events
+> - Planned to make deleting events function.
+#### 2.0-alpha.6 — Only Allowing Unique New Volunteer/Event Names 📍
+> - Published May 31st, 2026
+> - Custom Volunteer/Event textboxes become active when their respective dropdowns are on the "New" option.
+> - If a user inputs a Volunteer/Event name that already exists, they are warned and the textbox is emptied.
+> - Primary event dropdown is populated with any unique event already in the JSON.
+> - Delete event dropdown is populated with any events in a selected volunteer.
+> - (JS code now has regions for better readability 😊.)
+> - (MD headers for non-current commits are smaller now)
+##### 2.0-alpha.5 — Design III
+> - Published [May 30th, 2026](ef03934c6b83a5420e045fb7902862ebbe6df7d7)
 > - Stylised the buttons and input fields.
 > - Added minimum and step of 0.5 to hours input field.
-#### 2.0-alpha.4 — Design II
-> - Published May 30th, 2026
+##### 2.0-alpha.4 — Design II
+> - Published [May 30th, 2026](723180f059b2d70749df2db2267d0895914caa73)
 > - Created new table look.
-#### 2.0-alpha.3 — Design I
+##### 2.0-alpha.3 — Design I
 > - Published [May 30th, 2026](d38834fd47483002d7b09e204dbfee2ad1e8f6ab)
 > - New colour palette for both light and dark modes.
 > - Restyled major content to Sajid UI style.
 > - Created Delete form.
 > - Adjusted layout of Main form.
 > - Created textboxes for custom additions (non-functional).
-#### 2.0-alpha.2 — Design Preparations
-> - Published [May 30th, 2026](https://github.com/lunanobles/Volunteer-Logger/commit/258a3f7f8b07afbd0e099a65a6db202bf3563fa3)
+##### 2.0-alpha.2 — Design Preparations
+> - Published [May 30th, 2026](258a3f7f8b07afbd0e099a65a6db202bf3563fa3)
 > - Added Apercu Pro fontface, FBLA brand font.
 > - Added FBLA full logo and FBLA crest images.
 > - Edited font and general CSS stylesheets to accomodate font changes.
 > - (Drafted & sketched new design version.)
-#### 2.0-alpha.1
-> - Published [May 29th, 2026](https://github.com/lunanobles/Volunteer-Logger/commit/8f9002cfe9617c74b4307a468f1fcc771f7e7401)
+##### 2.0-alpha.1
+> - Published [May 29th, 2026](8f9002cfe9617c74b4307a468f1fcc771f7e7401)
 > - Creating this very README!
 > - Initiated the branch for the 2.0 development.
-#### 1.0
+##### 1.0
 > - <b>Release Version</b>
-> - Published [May 29th, 2026](https://github.com/lunanobles/Volunteer-Logger/commit/4fbdf74e5b50fab45c44af722c2dfe72bf7091b4)
+> - Published [May 29th, 2026](4fbdf74e5b50fab45c44af722c2dfe72bf7091b4)
 > - With pre-existing JSON data, add an event [hours, desc., date of event, date of log, and who logged it] to any volunteer via a dropdown menu!
 > - Create a new volunteer with a starting event via a simular form!
 > - View the data is a easy to read table!

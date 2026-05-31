@@ -1,11 +1,8 @@
 {
-    "ATC FBLA Attendant":{
-        "password":"fbla"
-    },
-    "Mr. Weber":{
-        "password":"mew_is_cool"
-    },
-    "Mrs. Lavender":{
-        "password":"flowers"
-    }
+    "Ms. Lavender":"",
+    "Mr. Weber":"",
+    "Historian's Office — AM":"",
+    "Historian's Office — PM":"",
+    "Secretary's Office":"",
+    "etc..":""
 }
