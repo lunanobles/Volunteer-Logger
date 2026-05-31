@@ -29,9 +29,16 @@ I hope you enjoy using it!
 
 
 ## Changelog (2.0 Family Only)
-##### 2.0-alpha.7 — Deleting Events
+##### 2.0-alpha.8 — Deleting Events
 > - Planned to make deleting events function.
-#### 2.0-alpha.6 — Only Allowing Unique New Volunteer/Event Names 📍
+#### 2.0-alpha.7 — Submit Form Functions!
+> - Published May 31st, 2026
+> - The Submit (or primary) form now updates the JSON data!
+> - New alert messages for form submit success/failure.
+> - Users must fill all input fields before submitting.
+> - Total hours for the table is actually correct now.
+> - Added more protections against caching.
+##### 2.0-alpha.6 — Only Allowing Unique New Volunteer/Event Names 📍
 > - Published May 31st, 2026
 > - Custom Volunteer/Event textboxes become active when their respective dropdowns are on the "New" option.
 > - If a user inputs a Volunteer/Event name that already exists, they are warned and the textbox is emptied.

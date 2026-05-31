@@ -30,7 +30,7 @@
                     <div id="name_input_area">
                         <h3 for="volunteer_names">Name:</h3>
                         <div class="indent">
-                            <select id="volunteer_names" title="Select a volunteer's name from the list to begin...">
+                            <select id="volunteer_names" title="Select a volunteer's name from the list to begin..." required>
                                 <option selected disabled>...pick a name</option>
                                 <option>test</option>
                             </select>
@@ -41,17 +41,17 @@
                         <div>
                             <div class="event_details event_details_left">
                                 <label for="volunteer_hours">Hours:</label><br/>
-                                <input id="volunteer_hours" type="number" min="0.5" step="0.5" class="indent"><br/>
+                                <input id="volunteer_hours" type="number" min="0.5" step="0.5" class="indent" required><br/>
                             </div>
                             <div class="event_details event_details_left">
                                 <label for="event_date">Event Date:</label><br/>
-                                <input id="event_date" type="date" title="Event Date" class="indent">
+                                <input id="event_date" type="date" title="Event Date" class="indent" required>
                             </div>
                         </div>
                         <div class="event_details event_details_right">
                             <label for="volunteer_opprotunity">Event Type:</label><br/>
                             <div>
-                                <select id="volunteer_opprotunity">
+                                <select id="volunteer_opprotunity" required>
                                     <option selected disabled>...Select an Event...</option>
                                     <option>test</option>
                                 </select>
@@ -73,7 +73,7 @@
                             <option selected disabled>...Select an Event...</option>
                             <option>test</option>
                         </select>
-                        <button type="button" id="delete_button">Delete</button>
+                        <button type="submit" id="delete_button">Delete</button>
                     </form>
                 </div>
             </section>

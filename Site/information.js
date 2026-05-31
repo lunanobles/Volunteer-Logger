@@ -51,13 +51,41 @@ const PHP_URL = "./server_side.php";
         const log_name          = logger_signin.value;
         const log_date          = new Date();
 
+
+        // Check if any data is missing:
+        if (current_volunteer == "...Select a Volunteer..." ||
+            event_hours == NaN ||
+            event_date == "" ||
+            event_description == "..Select an Event...")
+        {
+            alert("⚠️ Some data fields are missing. Please complete all information areas.")
+            return;
+        }
+
+
+
         const new_entry = [event_hours, event_description, event_date, log_date, log_name];
 
         // Grab fresh data
         const all_volunteers = await GetJSONData(JSON_URL_VOLUNTEERS);
 
         // Edit data
-        all_volunteers[current_volunteer].push(new_entry);
+        if (current_volunteer === "...New Volunteer...")
+        {
+            all_volunteers[name_custom.value] = [
+                [
+                    event_hours,
+                    event_description,
+                    event_date,
+                    log_date,
+                    log_name
+                ]
+            ]
+        }
+        else
+        {
+            all_volunteers[current_volunteer].push(new_entry);
+        }
 
         // Return edited data
                                   // I wrote my own PHP handler for the POST HTTP
@@ -73,15 +101,15 @@ const PHP_URL = "./server_side.php";
         const result = await response.json();
 
         if (response.ok && result.status === "success") { // If everything is good
-            test_el.innerText += "Successfully updated via XAMPP Apache!" + "\nNew Data: " + JSON.stringify(all_volunteers);
+            alert("🎉 Successfully updated! 🎉\n🕒 This page will reload ~30s after sumbit, to reload data for the site.");
 
             setTimeout(() => {
                 location.reload(); // reload the page to update the table
-            }, 10000); // wait 10sec to allow for seeing the success message
+            }, 30000); // wait 30sec to allow for seeing the success message
                        // and so the data can be parsed in time
 
         } else { // If stuff failed :(
-            test_el.innerText += "Server Error: " + result.message;
+            alert("⚠️ Server Error: " + result.message);
         }
 
 
@@ -90,7 +118,7 @@ const PHP_URL = "./server_side.php";
     });
 //#endregion
 
-//#region The old override button
+//#region Old override and create buttons
     /**
      * On click of the override-volunteer-hours button, we edit and update the data in the JSON.
      */
@@ -257,13 +285,16 @@ const PHP_URL = "./server_side.php";
 
     let volunteer_index = 0; // Not using a for loop's i because I want to use this var for ID naming
 
+    var grand_total_hours = 0;
+
     for (const [volunteer_name,                events] of Object.entries(data_volunteers))
              // ^ current volunteer's name     ^ [[],...] of event details //
     {
 
         //* Getting total hours for this volunteer
         const total_hours = events.reduce((total, current_event) => {
-            return total + Number(current_event[0])
+            grand_total_hours += Number(current_event[0]);
+            return total + Number(current_event[0]);
         }, 0); // reduce() is a bit of foreign function to me, but it seems to work, so I won't question it
 
 
@@ -336,6 +367,8 @@ const PHP_URL = "./server_side.php";
 
         volunteer_index++; // start everything over with the next volunteer
     }
+
+    table_body.insertAdjacentHTML('beforebegin', `<tr><td>Total</td><td>${grand_total_hours}</td></tr><br/>`)
 
     //#endregion
 
@@ -433,12 +466,14 @@ name_dropdown.addEventListener("change", event => {
     if (name_dropdown.value === "...New Volunteer...")
     {
         name_custom.removeAttribute("disabled");
+        name_custom.setAttribute("required", true);
         name_custom.setAttribute("title", "Create a new volunteer by entering a unique name...");
         name_custom.setAttribute("placeholder", "Jane Doe");
     }
     else
     {
         name_custom.setAttribute("disabled", true);
+        name_custom.removeAttribute("required");
         name_custom.setAttribute("title", "Select '...New Volunteer...' to use this...");
         name_custom.setAttribute("placeholder", "...");
     }
@@ -451,12 +486,14 @@ event_dropdown.addEventListener("change", event => {
     if (event_dropdown.value === "...New Event...")
     {
         event_custom.removeAttribute("disabled");
+        event_custom.setAttribute("required", true);
         event_custom.setAttribute("title", "Create a new volunteer by entering a unique name...");
         event_custom.setAttribute("placeholder", "Jane Doe");
     }
     else
     {
         event_custom.setAttribute("disabled", true);
+        event_custom.removeAttribute("required");
         event_custom.setAttribute("title", "Select '...New Volunteer...' to use this...");
         event_custom.setAttribute("placeholder", "...");
     }
