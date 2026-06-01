@@ -68,12 +68,36 @@
                     </div>
                     <form id="form_delete">
                         <p>Hidden by default.</p>
-                        <h3 for="event_to_delete_dropdown">Delete an event:</h3>
-                        <select id="event_to_delete_dropdown" title="Select an event to delete from the volunteers history...">
-                            <option selected disabled>...Select an Event...</option>
-                            <option>test</option>
-                        </select>
-                        <button type="submit" id="delete_button">Delete</button>
+                        <div id="delete_event" class="delete_area">
+                            <h3 for="event_to_delete_dropdown">Delete an event:</h3>
+                            <select id="event_to_delete_dropdown" title="Select an event to delete from the volunteers history...">
+                                <option selected disabled>...Select an Event...</option>
+                                <option>test</option>
+                            </select>
+                        </div>
+                        <div id="delete_volunteer" class="delete_area">
+                            <h3>⚠️ WARNING! You are in a dangerous area!</h3>
+                            <p>Deleting a volunteer from the database is <b>IREVERSABLE</b>!</p><br/>
+                            <div>
+                                <div>
+                                    <label for="volunteer_to_delete">Deleting </label>
+                                    <p id="volunteer_to_delete">None</p>
+                                </div><br/>
+                                <div>
+                                    <label for="delete_confirmation">Retype the message:</label><br/>
+                                    <div class="splitport_even">
+                                        <p id="confirmation_text_to_copy">I understand what I am doing. I understand that deleting a volunteer is not reversable.</p>
+                                        <textarea id="delete_confirmation" placeholder="Retype the message — case-sensitive."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" id="delete_button" disabled>Delete</button>
+                        
+                        <div class="show_hide_switch">
+                            <label for="show_hide_volunteer_mode">Volunteer Mode: </label>
+                            <input id="show_hide_volunteer_mode" type="checkbox" title="Show/Hide Delete Form"/>
+                        </div>
                     </form>
                 </div>
             </section>

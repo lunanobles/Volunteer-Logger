@@ -13,7 +13,8 @@
 
 button,
 input,
-select {
+select,
+textarea {
     background-color: var(--palette-content-foreground);
     color: var(--palette-text-muted);
     border: none;
@@ -48,11 +49,15 @@ button#delete_button {
     height: 5vh;
     margin-top: 5%;
 
-    &:hover {
+    &:not(:disabled):hover {
         color: var(--palette-content-foreground);
         cursor: pointer;
     }
 
-    &#submit_button:hover {background-color: var(--palette-success);}
-    &#delete_button:hover {background-color: var(--palette-danger);}
+    &#submit_button:not(:disabled):hover {background-color: var(--palette-success);}
+    &#delete_button:not(:disabled):hover {background-color: var(--palette-danger);}
+}
+
+*#delete_volunteer {
+    display: none;
 }

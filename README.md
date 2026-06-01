@@ -29,17 +29,26 @@ I hope you enjoy using it!
 
 
 ## Changelog (2.0 Family Only)
-##### 2.0-alpha.8 — Deleting Events
-> - Planned to make deleting events function.
-#### 2.0-alpha.7 — Submit Form Functions!
+##### 2.0-beta.1 — Clean-up
+> - The code is a bit of a mess and I want to clean everything before publish.
+...
+##### 2.0-alpha.9 — Deleting Events
+> - Planned to make the delete button actually remove the event or volunteer from the JSON data.
+#### 2.0-alpha.8 — Deleting Events (Preparation) 📍
 > - Published May 31st, 2026
+> - Created new area for deleting whole volunteers.
+> - Adjusted the dropdown menu for events to show the selected volunteer's events list.
+> - Showed which volunteer was selected for deletion.
+> - The delete button doesn't do anything yet.
+##### 2.0-alpha.7 — Submit Form Functions!
+> - Published [May 31st, 2026](cbdafda7654e2ff58d575f2bb67700526bd9e17f)
 > - The Submit (or primary) form now updates the JSON data!
 > - New alert messages for form submit success/failure.
 > - Users must fill all input fields before submitting.
 > - Total hours for the table is actually correct now.
 > - Added more protections against caching.
-##### 2.0-alpha.6 — Only Allowing Unique New Volunteer/Event Names 📍
-> - Published May 31st, 2026
+##### 2.0-alpha.6 — Only Allowing Unique New Volunteer/Event Names
+> - Published [May 31st, 2026](1e91e32f7083fa71fa8847725901b40b0381dfd9)
 > - Custom Volunteer/Event textboxes become active when their respective dropdowns are on the "New" option.
 > - If a user inputs a Volunteer/Event name that already exists, they are warned and the textbox is emptied.
 > - Primary event dropdown is populated with any unique event already in the JSON.

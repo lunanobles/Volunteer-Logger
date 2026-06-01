@@ -8,15 +8,18 @@ var hours_numeric   = document.getElementById("volunteer_hours");
 var event_date_box  = document.getElementById("event_date");
 var event_dropdown  = document.getElementById("volunteer_opprotunity");
 var event_custom    = document.getElementById("volunteer_opprotunity_new");
-//var new_name = document.getElementById("new_volunteer_name");
-//var new_hours = document.getElementById("new_volunteer_hours");
-//var new_event_date_box = document.getElementById("new_event_date");
-//var new_event_desc_box = document.getElementById("new_volunteer_opprotunity");
+var name_delete     = document.getElementById("volunteer_to_delete");
+var event_delete    = document.getElementById("event_to_delete_dropdown");
+var delete_message  = document.getElementById("confirmation_text_to_copy");
+var delete_input    = document.getElementById("delete_confirmation");
+var delete_mode     = document.getElementById("show_hide_volunteer_mode");
+
 var submit_button   = document.getElementById("submit_button");
-//var create_button = document.getElementById("new_volunteer_button");
-//var delete_button = document.getElementById("delete_volunteer_button");
+var delete_button   = document.getElementById("delete_button");
 var download_button = document.getElementById("download_button");
+
 var table_body      = document.getElementById("volunteers_table_body");
+var switch_form    = document.getElementById("show_hide_delete_form");
 
 
 /// Data Variables
@@ -52,10 +55,10 @@ const PHP_URL = "./server_side.php";
         const log_date          = new Date();
 
 
-        // Check if any data is missing:
+        // Check if any data is missing
         if (current_volunteer == "...Select a Volunteer..." ||
-            event_hours == NaN ||
-            event_date == "" ||
+            event_hours       == NaN ||
+            event_date        == "" ||
             event_description == "..Select an Event...")
         {
             alert("⚠️ Some data fields are missing. Please complete all information areas.")
@@ -216,7 +219,68 @@ const PHP_URL = "./server_side.php";
 //#endregion
 
 
+//#region DELETE
 
+    delete_button.addEventListener("click", event => {
+
+        var is_volunteer_mode = delete_mode.checked;
+
+        if (is_volunteer_mode)
+        {
+            const message = delete_message.innerText;
+            const input = delete_input.value;
+            const current_volunteer = name_delete.value;
+
+            if (input === message)
+            {
+                //! Delete the volunteer
+
+                alert(`You have successfully deleted ${current_volunteer}.`);
+            }
+            else
+            {
+                delete_button.setAttribute("disabled", true);
+            }
+        }
+        else 
+        {
+
+
+
+        }
+        
+
+    });
+
+
+
+    name_dropdown.addEventListener("change", event => {
+
+        
+        name_delete.innerText = name_dropdown.value;
+        
+
+        event_delete.innerHTML = `<option>...Select an Event...</option>`;
+
+        const local_events = [];
+
+        
+        var event_data = data_volunteers[name_dropdown.value]; // Get that volunteer's event data
+        
+        for (let i = 0; i < event_data.length; i++)
+        {
+            local_events.push(
+                event_data[i][1] // And add every event to the Set
+            );
+        }
+
+        local_events.forEach(event => {
+            event_delete.innerHTML += `<option>${event}</option>`; // Add the data to the HTML
+        });
+    })
+
+
+//#endregion
 
 
 
@@ -238,7 +302,9 @@ const PHP_URL = "./server_side.php";
     event_dropdown.innerHTML = "<option selected disabled>...Select an Event...</option>\n<option>...New Event...</option>";
 
     for (let i = 0; i < volunteers.length; i++)
+    {
         name_dropdown.innerHTML += `<option>${volunteers[i]}</option>`;
+    }
 
     for (let i = 0; i < loggers.length; i++)
         logger_signin.innerHTML += `<option>${loggers[i]}</option>`;
@@ -265,6 +331,7 @@ const PHP_URL = "./server_side.php";
         event_dropdown.innerHTML += `<option>${event}</option>`; // Add the data to the HTML
     })
 
+    
 
 
 
