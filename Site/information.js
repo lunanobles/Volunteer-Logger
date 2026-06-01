@@ -221,7 +221,11 @@ const PHP_URL = "./server_side.php";
 
 //#region DELETE
 
-    delete_button.addEventListener("click", event => {
+//* Current workpoint
+
+    delete_button.addEventListener("click", async event => {
+
+        event.preventDefault();
 
         var is_volunteer_mode = delete_mode.checked;
 
@@ -235,17 +239,69 @@ const PHP_URL = "./server_side.php";
             {
                 //! Delete the volunteer
 
-                alert(`You have successfully deleted ${current_volunteer}.`);
+                test_el.innerText = "err 1";
+
+                try 
+                {var local_volunteers_test = await GetJSONData(JSON_URL_VOLUNTEERS);}
+                catch (errors)
+                {test_el.innerText = errors; return;}
+                
+                test_el.innerText = "err 1.1";
+
+                
+                //* Current workpoint
+                // Something about this isnt deleting the volunteer :(
+                delete local_volunteers_test[current_volunteer];
+                
+                test_el.innerText = "err 2" + JSON.stringify(local_volunteers_test);
+                
+                return;
+                
+                const response = await fetch('server_side.php', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(local_volunteers_test)
+                });
+
+                test_el.innerText = "err 3" + response.status;
+
+                // Check the response from PHP
+                var result = await response.json();
+
+                test_el.innerText = "err 4";
+
+                if (response.ok && result.status === "success") { // If everything is good
+
+                    test_el.innerText = "err 5";
+
+                    alert("🎉 Successfully updated! 🎉\n🕒 This page will reload ~30s after sumbit, to reload data for the site.");
+
+                    setTimeout(() => {
+                        location.reload(); // reload the page to update the table
+                    }, 30000); // wait 30sec to allow for seeing the success message
+                            // and so the data can be parsed in time
+
+                } else { // If stuff failed :(
+
+                    test_el.innerText = "err 5";
+
+                    alert("⚠️ Server Error: " + result.message);
+                }
             }
             else
             {
+
+                test_el.innerText = "err 6";
+
                 delete_button.setAttribute("disabled", true);
             }
         }
         else 
         {
-
-
+        
+            test_el.innerText = "err 7";
 
         }
         
@@ -460,7 +516,7 @@ const PHP_URL = "./server_side.php";
         const response = await fetch(url);
         // If the network can't find the file, throw and error
         // If this is thrown, the locator/directory is likely messed up --> fetch("<HERE>")
-        if (!response.ok) {throw new Error('Error from network!');} 
+        if (!response.ok) {throw new Error('Error from network!' + response.status);} 
         // Convert the response into a JS object
         const volunteers_json = await response.json();
         // Returns an object
