@@ -55,18 +55,19 @@ delete_mode.addEventListener("click", event => {
         volunteer_mode.style.display = "none";
         event_mode.style.display = "block";
         delete_input.value = "";
-
-        
-        if (delete_input.value === delete_message.innerText)
-        {
-            delete_button.removeAttribute("disabled");
-        }
-        else
-        {
-            delete_button.setAttribute("disabled", true);
-        }
     }
 });
+
+
+
+delete_event.addEventListener("change", event => {
+    if (delete_event.value !== "...Select an Event...")
+        delete_button.removeAttribute("disabled");
+    else
+        delete_button.setAttribute("disabled", true);
+});
+
+
 
 delete_input.addEventListener("change", event => {
     if (delete_input.value === delete_message.innerText)

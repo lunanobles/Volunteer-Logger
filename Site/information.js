@@ -233,7 +233,7 @@ const PHP_URL = "./server_side.php";
         {
             const message = delete_message.innerText;
             const input = delete_input.value;
-            const current_volunteer = name_delete.value;
+            const current_volunteer = name_dropdown.value;
 
             if (input === message)
             {
@@ -251,11 +251,19 @@ const PHP_URL = "./server_side.php";
                 
                 //* Current workpoint
                 // Something about this isnt deleting the volunteer :(
-                delete local_volunteers_test[current_volunteer];
+                if (local_volunteers_test.hasOwnProperty(current_volunteer))
+                {
+                    delete local_volunteers_test[current_volunteer];
+                }
+                else 
+                {
+                    test_el.innerText = "err 2.5 & " + current_volunteer;
+                    return;
+                }
                 
                 test_el.innerText = "err 2" + JSON.stringify(local_volunteers_test);
                 
-                return;
+                
                 
                 const response = await fetch('server_side.php', { 
                     method: 'POST',
@@ -301,7 +309,71 @@ const PHP_URL = "./server_side.php";
         else 
         {
         
-            test_el.innerText = "err 7";
+            const message = delete_message.innerText;
+            const input = delete_input.value;
+            const current_volunteer = name_dropdown.value;
+            //! Delete the event
+            var current_event = delete_event.value;
+
+                test_el.innerText = "err 1";
+
+                try 
+                {var local_volunteers_test = await GetJSONData(JSON_URL_VOLUNTEERS);}
+                catch (errors)
+                {test_el.innerText = errors; return;}
+                
+                test_el.innerText = "err 1.1";
+
+                
+                //* Current workpoint
+                // Something about this isnt deleting the volunteer :(
+                if (local_volunteers_test.hasOwnProperty(current_volunteer))
+                {
+                    var this_volunteer = local_volunteers_test[current_volunteer];
+                    local_volunteers_test[current_volunteer] = this_volunteer.filter((event) => (event[1] !== current_event));
+                }
+                else 
+                {
+                    test_el.innerText = "err 2.5 & " + current_volunteer;
+                    return;
+                }
+                
+                test_el.innerText = "err 2" + JSON.stringify(local_volunteers_test);
+                
+                
+                
+                const response = await fetch('server_side.php', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(local_volunteers_test)
+                });
+
+                test_el.innerText = "err 3" + response.status;
+
+                // Check the response from PHP
+                var result = await response.json();
+
+                test_el.innerText = "err 4";
+
+                if (response.ok && result.status === "success") { // If everything is good
+
+                    test_el.innerText = "err 5";
+
+                    alert("🎉 Successfully updated! 🎉\n🕒 This page will reload ~30s after sumbit, to reload data for the site.");
+
+                    setTimeout(() => {
+                        location.reload(); // reload the page to update the table
+                    }, 30000); // wait 30sec to allow for seeing the success message
+                            // and so the data can be parsed in time
+
+                } else { // If stuff failed :(
+
+                    test_el.innerText = "err 5";
+
+                    alert("⚠️ Server Error: " + result.message);
+                }
 
         }
         
@@ -316,7 +388,7 @@ const PHP_URL = "./server_side.php";
         name_delete.innerText = name_dropdown.value;
         
 
-        event_delete.innerHTML = `<option>...Select an Event...</option>`;
+        event_delete.innerHTML = `<option disabled selected>...Select an Event...</option>`;
 
         const local_events = [];
 

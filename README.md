@@ -32,10 +32,17 @@ I hope you enjoy using it!
 ##### 2.0-beta.1 — Clean-up
 > - The code is a bit of a mess and I want to clean everything before publish.
 ...
-##### 2.0-alpha.9 — Deleting Events
-> - Planned to make the delete button actually remove the event or volunteer from the JSON data.
-#### 2.0-alpha.8 — Deleting Events (Preparation) 📍
-> - Published May 31st, 2026
+#### 2.0-alpha.10 — 2.0 Total Functionallity!
+> - Published June 1st, 2026 — HAPPY PRIDE! 🏳️‍🌈
+> - The deleting of volunteers functions.
+> - The deleting of volunteer's events functions.
+> - Deleting an event from a volunteer untill they have 0 events does NOT delete that volunteer; this is intended.
+> - (From here on out, I will mode this branch into beta, focusing on better code and any bugs that come up.)
+##### 2.0-alpha.9 — Deleting Events/Volunteers is Almost Working
+> - Published [June 1st, 2026](a653f7e695c0fca39159e015ebb1731d72bf29ec) — HAPPY PRIDE! 🏳️‍🌈
+> - More attempts to get the delete form working... all of which failed.
+##### 2.0-alpha.8 — Deleting Events (Preparation)
+> - Published [May 31st, 2026](02f18b6f3d8fd119305c3f32e5a30e2d13cfecc3)
 > - Created new area for deleting whole volunteers.
 > - Adjusted the dropdown menu for events to show the selected volunteer's events list.
 > - Showed which volunteer was selected for deletion.
