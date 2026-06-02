@@ -29,15 +29,19 @@ I hope you enjoy using it!
 
 
 ## Changelog (2.0 Family Only)
-##### 2.0-beta.1 — Clean-up
+##### 2.0-beta.2 — Clean-up of ___
 > - The code is a bit of a mess and I want to clean everything before publish.
 ...
-#### 2.0-alpha.10 — 2.0 Total Functionallity!
+#### 2.0-beta.1 — Random README 📍
 > - Published June 1st, 2026 — HAPPY PRIDE! 🏳️‍🌈
+> - Litterally just saving this README.
+##### 2.0-alpha.10 — 2.0 Total Functionallity!
+> - **[Pre-release Version](https://github.com/lunanobles/Volunteer-Logger/releases/tag/Version-2)**
+> - Published [June 1st, 2026](7b04284f2066293548b4f276c82aa3af87f254c7) — HAPPY PRIDE! 🏳️‍🌈
 > - The deleting of volunteers functions.
 > - The deleting of volunteer's events functions.
 > - Deleting an event from a volunteer untill they have 0 events does NOT delete that volunteer; this is intended.
-> - (From here on out, I will mode this branch into beta, focusing on better code and any bugs that come up.)
+> - (From here on out, I will mode this branch into beta, focusing on better code and any bugs that come up. I will not add any extra functionallity untill AFTER 2.0 full release. This project will be put into use, however.)
 ##### 2.0-alpha.9 — Deleting Events/Volunteers is Almost Working
 > - Published [June 1st, 2026](a653f7e695c0fca39159e015ebb1731d72bf29ec) — HAPPY PRIDE! 🏳️‍🌈
 > - More attempts to get the delete form working... all of which failed.
@@ -87,7 +91,7 @@ I hope you enjoy using it!
 > - Creating this very README!
 > - Initiated the branch for the 2.0 development.
 ##### 1.0
-> - <b>Release Version</b>
+> - **[Release Version](https://github.com/lunanobles/Volunteer-Logger/releases/tag/Version-1)**
 > - Published [May 29th, 2026](4fbdf74e5b50fab45c44af722c2dfe72bf7091b4)
 > - With pre-existing JSON data, add an event [hours, desc., date of event, date of log, and who logged it] to any volunteer via a dropdown menu!
 > - Create a new volunteer with a starting event via a simular form!
