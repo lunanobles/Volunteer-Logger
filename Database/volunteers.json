@@ -1,1 +1,39 @@
-{"Jane Doe":[[5.5,"Description","Date of Event","Log Date()","Logger Name"],[4,"This is test data.","2026-04-28","22/05/2026","... Not Signed In ..."],[7,"Silly things","2026-05-30","28/05/2026","Mrs. Lavender"],[6,"Does it update the table?","2026-05-28","28/05/2026","... Not Signed In ..."],[7,"f;khsfkhm","2026-05-29","29/05/2026","... Not Signed In ..."],[80,"Spent all year working for FBLA","2026-01-01","29/05/2026","... Not Signed In ..."],[1,"Spent all year working for FBLA","2026-05-31","2026-05-31T18:28:37.962Z","...Not Signed In..."],[null,"...Select an Event...","","2026-05-31T18:40:16.231Z","...Not Signed In..."],[null,"...Select an Event...","","2026-05-31T18:41:21.296Z","...Not Signed In..."],[1,"Silly things","2026-05-31","2026-05-31T18:54:41.601Z","...Not Signed In..."]],"Nattah Uman":[[10,"Description","Date of Event","Log Date()","Logger Name"],[10,"Description","Date of Event","Log Date()","Logger Name"],[7,"sfhshfgfsg","2026-05-21","21/05/2026","... Not Signed In ..."],[8,"dsgsdfgzg","2026-05-22","22/05/2026","Mr. Weber"],[3,"This is test data.","2026-05-31","2026-05-31T18:27:03.731Z","...Not Signed In..."]],"New Name":[[null,"...Select an Event...","","2026-05-31T18:41:51.674Z","...Not Signed In..."],[null,"...Select an Event...","","2026-05-31T18:42:11.143Z","...Not Signed In..."]],"Human Person":[[7,"THis event is the volunteer's first!","2026-05-29","29/05/2026","... Not Signed In ..."]],"Someone's Brain":[[1.5,"THis event is the volunteer's first!","2026-05-27","2026-05-31T18:14:54.037Z","...Not Signed In..."]],"A Person":[[4,"Silly things","2026-05-08","2026-05-31T18:22:28.311Z","...Not Signed In..."]]}
+{
+    "DO NO USE — Example Events": [
+        [
+            0,
+            "Food Sales",
+            "X",
+            "X",
+            "X"
+        ],
+        [
+            0,
+            "Food Preparation",
+            "X",
+            "X",
+            "X"
+        ],
+        [
+            0,
+            "Open House Assistance",
+            "X",
+            "X",
+            "X"
+        ],
+        [
+            0,
+            "Tidewater Regionals Assistance",
+            "X",
+            "X",
+            "X"
+        ],
+        [
+            0,
+            "In-House Event Set-Up/Tear-Down",
+            "X",
+            "X",
+            "X"
+        ]
+    ]
+}
