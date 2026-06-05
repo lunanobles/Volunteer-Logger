@@ -1,39 +1,39 @@
 {
-    "DO NO USE — Example Events": [
+    "DO NOT USE — Example Events": [
         [
             0,
             "Food Sales",
-            "X",
-            "X",
-            "X"
+            "1970-01-01",
+            "January 1, 1970, 00:00:00 UTC",
+            "Data Preparation"
         ],
         [
             0,
             "Food Preparation",
-            "X",
-            "X",
-            "X"
+            "1970-01-01",
+            "January 1, 1970, 00:00:00 UTC",
+            "Data Preparation"
         ],
         [
             0,
             "Open House Assistance",
-            "X",
-            "X",
-            "X"
+            "1970-01-01",
+            "January 1, 1970, 00:00:00 UTC",
+            "Data Preparation"
         ],
         [
             0,
             "Tidewater Regionals Assistance",
-            "X",
-            "X",
-            "X"
+            "1970-01-01",
+            "January 1, 1970, 00:00:00 UTC",
+            "Data Preparation"
         ],
         [
             0,
             "In-House Event Set-Up/Tear-Down",
-            "X",
-            "X",
-            "X"
+            "1970-01-01",
+            "January 1, 1970, 00:00:00 UTC",
+            "Data Preparation"
         ]
     ]
 }
